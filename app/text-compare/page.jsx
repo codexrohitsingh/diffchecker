@@ -339,7 +339,7 @@ const lineDiff = diffLines(clean1, clean2);
     if (cell.type !== "unchanged") setActiveLine(globalIdx);
   }}
   className={`
-    text-slate-700 dark:text-slate-300 px-1 flex-1 cursor-pointer 
+    text-slate-700 dark:text-slate-300 px-1 flex-1 cursor-pointer overflow-y-auto
     ${cell.type !== "unchanged" ? "hover:bg-yellow-200 dark:hover:bg-yellow-700" : ""}
   `}
   dangerouslySetInnerHTML={{ __html: cell.text || "" }}
@@ -587,7 +587,7 @@ const lineDiff = diffLines(clean1, clean2);
                 <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
                   Text 1
                 </h3>
-                <div className="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-4 min-h-64 font-mono text-sm leading-relaxed whitespace-pre-wrap overflow-y-auto">
+                <div className="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-4 min-h-64 font-mono text-sm leading-relaxed break-words whitespace-pre-wrap">
                   {renderAlignedColumn(diffResult.aligned, 'left')}
                 </div>
               </div>
@@ -596,7 +596,7 @@ const lineDiff = diffLines(clean1, clean2);
                 <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
                   Text 2
                 </h3>
-                <div className="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-4 min-h-64 font-mono text-sm leading-relaxed whitespace-pre-wrap overflow-y-auto">
+                <div className="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-4 min-h-64 font-mono text-sm leading-relaxed break-words whitespace-pre-wrap">
                   {renderAlignedColumn(diffResult.aligned, 'right')}
                 </div>
               </div>
