@@ -33,9 +33,9 @@ export default function TextCompare() {
   const [compared, setCompared] = useState(false)
   const [diffResult, setDiffResult] = useState(null)
 
-  const [removeExtraLines1, setRemoveExtraLines1] = useState(false)
+  const [removeExtraLines1, setRemoveExtraLines1] = useState(true)
   const [removeSpaces1, setRemoveSpaces1] = useState(true)
-  const [removeExtraLines2, setRemoveExtraLines2] = useState(false)
+  const [removeExtraLines2, setRemoveExtraLines2] = useState(true)
   const [removeSpaces2, setRemoveSpaces2] = useState(true)
 const [mergeSelections, setMergeSelections] = useState([]);
 const [activeLine, setActiveLine] = useState(null);
