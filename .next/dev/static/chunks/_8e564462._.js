@@ -312,7 +312,7 @@ function TextCompare() {
     ${cell.type !== "unchanged" ? "hover:bg-yellow-200 dark:hover:bg-yellow-700" : ""}
   `,
                                 dangerouslySetInnerHTML: {
-                                    __html: cell.text || "&nbsp;"
+                                    __html: cell.text || ""
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/app/text-compare/page.jsx",

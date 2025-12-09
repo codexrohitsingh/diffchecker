@@ -342,7 +342,7 @@ const lineDiff = diffLines(clean1, clean2);
     text-slate-700 dark:text-slate-300 px-1 flex-1 cursor-pointer 
     ${cell.type !== "unchanged" ? "hover:bg-yellow-200 dark:hover:bg-yellow-700" : ""}
   `}
-  dangerouslySetInnerHTML={{ __html: cell.text || "&nbsp;" }}
+  dangerouslySetInnerHTML={{ __html: cell.text || "" }}
 />
 {activeLine === globalIdx && (
   <div className="ml-2 flex gap-2">
