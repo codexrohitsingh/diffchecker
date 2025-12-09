@@ -216,14 +216,14 @@ const lineDiff = diffLines(clean1, clean2);
             const words = highlightWords(line, '')
             aligned.push({
               left: { text: words.left, type: 'removed' },
-              right: { text: words.right, type: 'removed_gap' }
+              right: { text: words.right, type: 'removed' }
             })
           }
         } else if (segment.added) {
           if (!isEmpty) {
             const words = highlightWords('', line)
             aligned.push({
-              left: { text: words.left, type: 'added_gap' },
+              left: { text: words.left, type: 'added' },
               right: { text: words.right, type: 'added' }
             })
           }

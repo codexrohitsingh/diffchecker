@@ -840,14 +840,6 @@
     overflow: hidden;
   }
 
-  .overflow-x-auto {
-    overflow-x: auto;
-  }
-
-  .overflow-x-hidden {
-    overflow-x: hidden;
-  }
-
   .overflow-y-auto {
     overflow-y: auto;
   }
@@ -1147,10 +1139,6 @@
 
   .break-words {
     overflow-wrap: break-word;
-  }
-
-  .whitespace-pre {
-    white-space: pre;
   }
 
   .whitespace-pre-wrap {

@@ -182,7 +182,7 @@ function TextCompare() {
                             },
                             right: {
                                 text: words.right,
-                                type: 'removed_gap'
+                                type: 'removed'
                             }
                         });
                     }
@@ -192,7 +192,7 @@ function TextCompare() {
                         aligned.push({
                             left: {
                                 text: words.left,
-                                type: 'added_gap'
+                                type: 'added'
                             },
                             right: {
                                 text: words.right,
