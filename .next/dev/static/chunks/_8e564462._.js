@@ -168,62 +168,102 @@ function TextCompare() {
         if (!text1 || !text2) return;
         const clean1 = normalizeInput(text1, removeExtraLines1, removeSpaces1);
         const clean2 = normalizeInput(text2, removeExtraLines2, removeSpaces2);
-        const lineDiff = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$diff$2f$libesm$2f$diff$2f$line$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["diffLines"])(clean1, clean2);
+        const diffs = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$diff$2f$libesm$2f$diff$2f$line$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["diffLines"])(clean1, clean2);
         const aligned = [];
-        lineDiff.forEach((segment)=>{
-            const lines = segment.value.split('\n');
-            lines.forEach((line)=>{
-                const isEmpty = line === '';
-                if (segment.removed) {
-                    if (!isEmpty) {
-                        const words = highlightWords(line, '');
-                        aligned.push({
-                            left: {
-                                text: words.left,
-                                type: 'removed'
-                            },
-                            right: {
-                                text: words.right,
-                                type: 'removed_gap'
-                            }
-                        });
-                    }
-                } else if (segment.added) {
-                    if (!isEmpty) {
-                        const words = highlightWords('', line);
-                        aligned.push({
-                            left: {
-                                text: words.left,
-                                type: 'added_gap'
-                            },
-                            right: {
-                                text: words.right,
-                                type: 'added'
-                            }
-                        });
-                    }
-                } else {
-                    if (!isEmpty) {
-                        const words = highlightWords(line, line);
-                        aligned.push({
-                            left: {
-                                text: words.left,
-                                type: 'unchanged'
-                            },
-                            right: {
-                                text: words.right,
-                                type: 'unchanged'
-                            }
-                        });
-                    }
+        let i = 0;
+        while(i < diffs.length){
+            const block = diffs[i];
+            // ---- CASE 1: unchanged ----
+            if (!block.added && !block.removed) {
+                const lines = block.value.split('\n');
+                if (lines[lines.length - 1] === "") lines.pop();
+                lines.forEach((line)=>{
+                    const words = highlightWords(line, line);
+                    aligned.push({
+                        left: {
+                            text: words.left,
+                            type: "unchanged"
+                        },
+                        right: {
+                            text: words.right,
+                            type: "unchanged"
+                        }
+                    });
+                });
+                i++;
+                continue;
+            }
+            // ---- CASE 2: removed + added pair (modified line) ----
+            if (block.removed && i + 1 < diffs.length && diffs[i + 1].added) {
+                const removedLines = block.value.split("\n");
+                const addedLines = diffs[i + 1].value.split("\n");
+                if (removedLines[removedLines.length - 1] === "") removedLines.pop();
+                if (addedLines[addedLines.length - 1] === "") addedLines.pop();
+                const maxLen = Math.max(removedLines.length, addedLines.length);
+                for(let j = 0; j < maxLen; j++){
+                    const leftLine = removedLines[j] || "";
+                    const rightLine = addedLines[j] || "";
+                    const words = highlightWords(leftLine, rightLine);
+                    aligned.push({
+                        left: {
+                            text: words.left,
+                            type: "modified-left"
+                        },
+                        right: {
+                            text: words.right,
+                            type: "modified-right"
+                        }
+                    });
                 }
-            });
-        });
+                i += 2;
+                continue;
+            }
+            // ---- CASE 3: only removed ----
+            if (block.removed) {
+                const lines = block.value.split("\n");
+                if (lines[lines.length - 1] === "") lines.pop();
+                lines.forEach((line)=>{
+                    const words = highlightWords(line, "");
+                    aligned.push({
+                        left: {
+                            text: words.left,
+                            type: "removed"
+                        },
+                        right: {
+                            text: "",
+                            type: "gap"
+                        }
+                    });
+                });
+                i++;
+                continue;
+            }
+            // ---- CASE 4: only added ----
+            if (block.added) {
+                const lines = block.value.split("\n");
+                if (lines[lines.length - 1] === "") lines.pop();
+                lines.forEach((line)=>{
+                    const words = highlightWords("", line);
+                    aligned.push({
+                        left: {
+                            text: "",
+                            type: "gap"
+                        },
+                        right: {
+                            text: words.right,
+                            type: "added"
+                        }
+                    });
+                });
+                i++;
+                continue;
+            }
+        }
+        // Save results
         setDiffResult({
             aligned
         });
-        setMergeSelections(aligned.map((row)=>row.left.type === 'unchanged' ? 'unchanged' : 'left' // default to left for changes
-        ));
+        setMergeSelections(aligned.map((row)=>row.left.type === "unchanged" ? "unchanged" : "left"));
         setCompared(true);
     };
     // ----------------------
@@ -302,7 +342,7 @@ function TextCompare() {
                                 children: lineCounter
                             }, void 0, false, {
                                 fileName: "[project]/app/text-compare/page.jsx",
-                                lineNumber: 336,
+                                lineNumber: 393,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -318,7 +358,7 @@ function TextCompare() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/app/text-compare/page.jsx",
-                                lineNumber: 341,
+                                lineNumber: 398,
                                 columnNumber: 11
                             }, this),
                             activeLine === globalIdx && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -330,7 +370,7 @@ function TextCompare() {
                                         children: "Merge from Text 1"
                                     }, void 0, false, {
                                         fileName: "[project]/app/text-compare/page.jsx",
-                                        lineNumber: 353,
+                                        lineNumber: 410,
                                         columnNumber: 5
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -339,25 +379,25 @@ function TextCompare() {
                                         children: "Merge from Text 2"
                                     }, void 0, false, {
                                         fileName: "[project]/app/text-compare/page.jsx",
-                                        lineNumber: 359,
+                                        lineNumber: 416,
                                         columnNumber: 5
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/text-compare/page.jsx",
-                                lineNumber: 352,
+                                lineNumber: 409,
                                 columnNumber: 3
                             }, this)
                         ]
                     }, `${gIdx}-${idx}`, true, {
                         fileName: "[project]/app/text-compare/page.jsx",
-                        lineNumber: 333,
+                        lineNumber: 390,
                         columnNumber: 11
                     }, this);
                 })
             }, gIdx, false, {
                 fileName: "[project]/app/text-compare/page.jsx",
-                lineNumber: 327,
+                lineNumber: 384,
                 columnNumber: 5
             }, this));
     };
@@ -373,7 +413,7 @@ function TextCompare() {
                 children: idx + 1
             }, idx, false, {
                 fileName: "[project]/app/text-compare/page.jsx",
-                lineNumber: 389,
+                lineNumber: 446,
                 columnNumber: 7
             }, this));
     const syncScroll = (containerRef, lineNumbersRef)=>{
@@ -417,14 +457,14 @@ function TextCompare() {
                             className: "w-4 h-4"
                         }, void 0, false, {
                             fileName: "[project]/app/text-compare/page.jsx",
-                            lineNumber: 427,
+                            lineNumber: 484,
                             columnNumber: 11
                         }, this),
                         "Back to Home"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/text-compare/page.jsx",
-                    lineNumber: 423,
+                    lineNumber: 480,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -435,7 +475,7 @@ function TextCompare() {
                             children: "Cleaning Options"
                         }, void 0, false, {
                             fileName: "[project]/app/text-compare/page.jsx",
-                            lineNumber: 442,
+                            lineNumber: 499,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -449,7 +489,7 @@ function TextCompare() {
                                             onChange: toggleRemoveExtraLines1
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 448,
+                                            lineNumber: 505,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -457,13 +497,13 @@ function TextCompare() {
                                             children: "Remove extra lines (Text 1)"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 449,
+                                            lineNumber: 506,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 447,
+                                    lineNumber: 504,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -474,7 +514,7 @@ function TextCompare() {
                                             onChange: toggleRemoveSpaces1
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 455,
+                                            lineNumber: 512,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -482,13 +522,13 @@ function TextCompare() {
                                             children: "Remove spaces (Text 1)"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 456,
+                                            lineNumber: 513,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 454,
+                                    lineNumber: 511,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -499,7 +539,7 @@ function TextCompare() {
                                             onChange: toggleRemoveExtraLines2
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 462,
+                                            lineNumber: 519,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -507,13 +547,13 @@ function TextCompare() {
                                             children: "Remove extra lines (Text 2)"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 463,
+                                            lineNumber: 520,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 461,
+                                    lineNumber: 518,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -524,7 +564,7 @@ function TextCompare() {
                                             onChange: toggleRemoveSpaces2
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 469,
+                                            lineNumber: 526,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -532,25 +572,25 @@ function TextCompare() {
                                             children: "Remove spaces (Text 2)"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 470,
+                                            lineNumber: 527,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 468,
+                                    lineNumber: 525,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/text-compare/page.jsx",
-                            lineNumber: 446,
+                            lineNumber: 503,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/text-compare/page.jsx",
-                    lineNumber: 441,
+                    lineNumber: 498,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -569,7 +609,7 @@ function TextCompare() {
                                                     children: "Text 1"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/text-compare/page.jsx",
-                                                    lineNumber: 484,
+                                                    lineNumber: 541,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -580,13 +620,13 @@ function TextCompare() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/text-compare/page.jsx",
-                                                    lineNumber: 487,
+                                                    lineNumber: 544,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 483,
+                                            lineNumber: 540,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -598,7 +638,7 @@ function TextCompare() {
                                                     children: lineNumbers(text1)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/text-compare/page.jsx",
-                                                    lineNumber: 493,
+                                                    lineNumber: 550,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -609,19 +649,19 @@ function TextCompare() {
                                                     className: "w-full h-80 p-4 pl-12 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 resize-none transition-colors"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/text-compare/page.jsx",
-                                                    lineNumber: 500,
+                                                    lineNumber: 557,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 492,
+                                            lineNumber: 549,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 482,
+                                    lineNumber: 539,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -634,7 +674,7 @@ function TextCompare() {
                                                     children: "Text 2"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/text-compare/page.jsx",
-                                                    lineNumber: 513,
+                                                    lineNumber: 570,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -645,13 +685,13 @@ function TextCompare() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/text-compare/page.jsx",
-                                                    lineNumber: 516,
+                                                    lineNumber: 573,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 512,
+                                            lineNumber: 569,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -663,7 +703,7 @@ function TextCompare() {
                                                     children: lineNumbers(text2)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/text-compare/page.jsx",
-                                                    lineNumber: 522,
+                                                    lineNumber: 579,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -674,25 +714,25 @@ function TextCompare() {
                                                     className: "w-full h-80 p-4 pl-12 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 resize-none transition-colors"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/text-compare/page.jsx",
-                                                    lineNumber: 529,
+                                                    lineNumber: 586,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 521,
+                                            lineNumber: 578,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 511,
+                                    lineNumber: 568,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/text-compare/page.jsx",
-                            lineNumber: 479,
+                            lineNumber: 536,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -705,7 +745,7 @@ function TextCompare() {
                                     children: "Compare Texts"
                                 }, void 0, false, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 542,
+                                    lineNumber: 599,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -717,14 +757,14 @@ function TextCompare() {
                                             className: "w-4 h-4"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 555,
+                                            lineNumber: 612,
                                             columnNumber: 15
                                         }, this),
                                         "Swap"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 550,
+                                    lineNumber: 607,
                                     columnNumber: 13
                                 }, this),
                                 compared && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -735,26 +775,26 @@ function TextCompare() {
                                             className: "w-4 h-4"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 564,
+                                            lineNumber: 621,
                                             columnNumber: 17
                                         }, this),
                                         "Reset"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 560,
+                                    lineNumber: 617,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/text-compare/page.jsx",
-                            lineNumber: 541,
+                            lineNumber: 598,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/text-compare/page.jsx",
-                    lineNumber: 478,
+                    lineNumber: 535,
                     columnNumber: 9
                 }, this),
                 compared && diffResult && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -765,7 +805,7 @@ function TextCompare() {
                             children: "Comparison Results"
                         }, void 0, false, {
                             fileName: "[project]/app/text-compare/page.jsx",
-                            lineNumber: 575,
+                            lineNumber: 632,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -778,7 +818,7 @@ function TextCompare() {
                                             children: "Text 1"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 591,
+                                            lineNumber: 648,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -786,13 +826,13 @@ function TextCompare() {
                                             children: renderAlignedColumn(diffResult.aligned, 'left')
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 594,
+                                            lineNumber: 651,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 590,
+                                    lineNumber: 647,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -802,7 +842,7 @@ function TextCompare() {
                                             children: "Text 2"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 600,
+                                            lineNumber: 657,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -810,19 +850,19 @@ function TextCompare() {
                                             children: renderAlignedColumn(diffResult.aligned, 'right')
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 603,
+                                            lineNumber: 660,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 599,
+                                    lineNumber: 656,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/text-compare/page.jsx",
-                            lineNumber: 589,
+                            lineNumber: 646,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -836,7 +876,7 @@ function TextCompare() {
                                             children: "Removed"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 612,
+                                            lineNumber: 669,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -844,13 +884,13 @@ function TextCompare() {
                                             children: countLines(diffResult.aligned, 'left', 'removed')
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 615,
+                                            lineNumber: 672,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 611,
+                                    lineNumber: 668,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -861,7 +901,7 @@ function TextCompare() {
                                             children: "Added"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 621,
+                                            lineNumber: 678,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -869,13 +909,13 @@ function TextCompare() {
                                             children: countLines(diffResult.aligned, 'right', 'added')
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 624,
+                                            lineNumber: 681,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 620,
+                                    lineNumber: 677,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -886,7 +926,7 @@ function TextCompare() {
                                             children: "Identical"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 630,
+                                            lineNumber: 687,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -894,36 +934,36 @@ function TextCompare() {
                                             children: countLines(diffResult.aligned, 'left', 'unchanged')
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-compare/page.jsx",
-                                            lineNumber: 633,
+                                            lineNumber: 690,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-compare/page.jsx",
-                                    lineNumber: 629,
+                                    lineNumber: 686,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/text-compare/page.jsx",
-                            lineNumber: 610,
+                            lineNumber: 667,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/text-compare/page.jsx",
-                    lineNumber: 574,
+                    lineNumber: 631,
                     columnNumber: 11
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/text-compare/page.jsx",
-            lineNumber: 421,
+            lineNumber: 478,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/text-compare/page.jsx",
-        lineNumber: 420,
+        lineNumber: 477,
         columnNumber: 5
     }, this);
 }

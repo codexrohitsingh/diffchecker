@@ -199,56 +199,113 @@ const mergeSingleLine = (idx, source) => {
 }
 
 
-  const compareTexts = () => {
-    
-    if (!text1 || !text2) return
+const compareTexts = () => {
+  if (!text1 || !text2) return;
 
-   const clean1 = normalizeInput(text1, removeExtraLines1, removeSpaces1);
-const clean2 = normalizeInput(text2, removeExtraLines2, removeSpaces2);
+  const clean1 = normalizeInput(text1, removeExtraLines1, removeSpaces1);
+  const clean2 = normalizeInput(text2, removeExtraLines2, removeSpaces2);
 
-const lineDiff = diffLines(clean1, clean2);
+  const diffs = diffLines(clean1, clean2);
+  const aligned = [];
 
-    const aligned = []
+  let i = 0;
 
-    lineDiff.forEach((segment) => {
-      const lines = segment.value.split('\n')
+  while (i < diffs.length) {
+    const block = diffs[i];
+
+    // ---- CASE 1: unchanged ----
+    if (!block.added && !block.removed) {
+      const lines = block.value.split('\n');
+      if (lines[lines.length - 1] === "") lines.pop();
+
       lines.forEach((line) => {
-        const isEmpty = line === ''
+        const words = highlightWords(line, line);
+        aligned.push({
+          left: { text: words.left, type: "unchanged" },
+          right: { text: words.right, type: "unchanged" }
+        });
+      });
 
-        if (segment.removed) {
-          if (!isEmpty) {
-            const words = highlightWords(line, '')
-            aligned.push({
-              left: { text: words.left, type: 'removed' },
-              right: { text: words.right, type: 'removed_gap' }
-            })
-          }
-        } else if (segment.added) {
-          if (!isEmpty) {
-            const words = highlightWords('', line)
-            aligned.push({
-              left: { text: words.left, type: 'added_gap' },
-              right: { text: words.right, type: 'added' }
-            })
-          }
-        } else {
-          if (!isEmpty) {
-            const words = highlightWords(line, line)
-            aligned.push({
-              left: { text: words.left, type: 'unchanged' },
-              right: { text: words.right, type: 'unchanged' }
-            })
-          }
-        }
-      })
-    })
+      i++;
+      continue;
+    }
 
-    setDiffResult({ aligned })
-    setMergeSelections(aligned.map(row => 
-  row.left.type === 'unchanged' ? 'unchanged' : 'left' // default to left for changes
-));
-    setCompared(true)
+    // ---- CASE 2: removed + added pair (modified line) ----
+    if (block.removed && i + 1 < diffs.length && diffs[i + 1].added) {
+      const removedLines = block.value.split("\n");
+      const addedLines = diffs[i + 1].value.split("\n");
+
+      if (removedLines[removedLines.length - 1] === "") removedLines.pop();
+      if (addedLines[addedLines.length - 1] === "") addedLines.pop();
+
+      const maxLen = Math.max(removedLines.length, addedLines.length);
+
+      for (let j = 0; j < maxLen; j++) {
+        const leftLine = removedLines[j] || "";
+        const rightLine = addedLines[j] || "";
+
+        const words = highlightWords(leftLine, rightLine);
+
+        aligned.push({
+          left: { text: words.left, type: "modified-left" },
+          right: { text: words.right, type: "modified-right" }
+        });
+      }
+
+      i += 2;
+      continue;
+    }
+
+    // ---- CASE 3: only removed ----
+    if (block.removed) {
+      const lines = block.value.split("\n");
+      if (lines[lines.length - 1] === "") lines.pop();
+
+      lines.forEach((line) => {
+        const words = highlightWords(line, "");
+        aligned.push({
+          left: { text: words.left, type: "removed" },
+          right: { text: "", type: "gap" }
+        });
+      });
+
+      i++;
+      continue;
+    }
+
+    // ---- CASE 4: only added ----
+    if (block.added) {
+      const lines = block.value.split("\n");
+      if (lines[lines.length - 1] === "") lines.pop();
+
+      lines.forEach((line) => {
+        const words = highlightWords("", line);
+        aligned.push({
+          left: { text: "", type: "gap" },
+          right: { text: words.right, type: "added" }
+        });
+      });
+
+      i++;
+      continue;
+    }
   }
+
+  // Save results
+  setDiffResult({ aligned });
+
+  setMergeSelections(
+    aligned.map((row) =>
+      row.left.type === "unchanged" ? "unchanged" : "left"
+    )
+  );
+
+  setCompared(true);
+};
+
+
+
+
 
   // ----------------------
   // Swap & Reset
