@@ -216,14 +216,14 @@ const lineDiff = diffLines(clean1, clean2);
             const words = highlightWords(line, '')
             aligned.push({
               left: { text: words.left, type: 'removed' },
-              right: { text: words.right, type: 'removed' }
+              right: { text: words.right, type: 'removed_gap' }
             })
           }
         } else if (segment.added) {
           if (!isEmpty) {
             const words = highlightWords('', line)
             aligned.push({
-              left: { text: words.left, type: 'added' },
+              left: { text: words.left, type: 'added_gap' },
               right: { text: words.right, type: 'added' }
             })
           }
@@ -571,7 +571,7 @@ const lineDiff = diffLines(clean1, clean2);
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
               Comparison Results
             </h2>
-  <button
+  {/* <button
     onClick={() => {
       const merged = mergeChanges();
       if (merged !== undefined) {
@@ -581,7 +581,7 @@ const lineDiff = diffLines(clean1, clean2);
     className="mt-4 px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors"
   >
     Merge Changes
-  </button>
+  </button> */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">

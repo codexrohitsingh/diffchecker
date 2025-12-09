@@ -179,7 +179,7 @@ function TextCompare() {
                             },
                             right: {
                                 text: words.right,
-                                type: 'removed'
+                                type: 'removed_gap'
                             }
                         });
                     }
@@ -189,7 +189,7 @@ function TextCompare() {
                         aligned.push({
                             left: {
                                 text: words.left,
-                                type: 'added'
+                                type: 'added_gap'
                             },
                             right: {
                                 text: words.right,
@@ -754,20 +754,6 @@ function TextCompare() {
                             fileName: "[project]/app/text-compare/page.jsx",
                             lineNumber: 571,
                             columnNumber: 13
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                            onClick: ()=>{
-                                const merged = mergeChanges();
-                                if (merged !== undefined) {
-                                    alert('Merged Text:\n\n' + merged);
-                                }
-                            },
-                            className: "mt-4 px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors",
-                            children: "Merge Changes"
-                        }, void 0, false, {
-                            fileName: "[project]/app/text-compare/page.jsx",
-                            lineNumber: 574,
-                            columnNumber: 3
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "grid grid-cols-1 lg:grid-cols-2 gap-6",
