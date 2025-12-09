@@ -587,7 +587,7 @@ const lineDiff = diffLines(clean1, clean2);
                 <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
                   Text 1
                 </h3>
-                <div className="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-4 min-h-64 font-mono text-sm leading-relaxed break-words whitespace-pre-wrap">
+                <div className="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-4 min-h-64 font-mono text-sm leading-relaxed whitespace-pre-wrap overflow-y-auto">
                   {renderAlignedColumn(diffResult.aligned, 'left')}
                 </div>
               </div>
@@ -596,7 +596,7 @@ const lineDiff = diffLines(clean1, clean2);
                 <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
                   Text 2
                 </h3>
-                <div className="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-4 min-h-64 font-mono text-sm leading-relaxed break-words whitespace-pre-wrap">
+                <div className="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-4 min-h-64 font-mono text-sm leading-relaxed whitespace-pre-wrap overflow-y-auto">
                   {renderAlignedColumn(diffResult.aligned, 'right')}
                 </div>
               </div>
