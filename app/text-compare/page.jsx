@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react'
 import { RotateCcw, ArrowLeft, ArrowRightLeft } from 'lucide-react'
 import Link from 'next/link'
 import { diffLines, diffWords } from 'diff'
-
+console.log("hi there ")
 // ----------------------
 // Toggle Component
 // ----------------------
