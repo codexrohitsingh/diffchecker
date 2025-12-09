@@ -18,20 +18,20 @@ export default function Home() {
       ],
       route: "/text-cleaner",
     },
-    {
-      id: "text-compare",
-      icon: GitCompare,
-      title: "Clean & Compare",
-      description:
-        "Compare two texts side by side and highlight all differences instantly.",
-      features: [
-        "Line-by-line comparison",
-        "Auto Clean both text",
-        "Configurable cleaning options",
-        "Highlight Differences",
-      ],
-      route: "/text-compare",
-    },
+    // {
+    //   id: "text-compare",
+    //   icon: GitCompare,
+    //   title: "Clean & Compare",
+    //   description:
+    //     "Compare two texts side by side and highlight all differences instantly.",
+    //   features: [
+    //     "Line-by-line comparison",
+    //     "Auto Clean both text",
+    //     "Configurable cleaning options",
+    //     "Highlight Differences",
+    //   ],
+    //   route: "/text-compare",
+    // },
     // {
     //   id: "clean-and-compare",
     //   icon: Layers,

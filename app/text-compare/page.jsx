@@ -117,12 +117,14 @@ const mergeSingleLine = (idx, source) => {
     const cleaned = cleanText(value, removeExtraLines1, removeSpaces1)
     setText1(cleaned)
   }
-
+  console.log(setText1)
+  
   const handleText2Change = (value) => {
     setRawText2(value)
     const cleaned = cleanText(value, removeExtraLines2, removeSpaces2)
     setText2(cleaned)
   }
+  console.log(setText2)
 
   // ----------------------
   // Toggles
@@ -179,21 +181,23 @@ const mergeSingleLine = (idx, source) => {
   // ----------------------
   // Compare
   // ----------------------
-  const normalizeInput = (text, removeLines, removeSpaces) => {
-  // Clean according to toggles
-   let cleaned = cleanText(text, removeLines, removeSpaces);
+ const normalizeInput = (text, removeLines, removeSpaces) => {
+  let cleaned = cleanText(text, removeLines, removeSpaces);
 
-  // Remove trailing blank lines always
-  cleaned = cleaned.replace(/\n+$/g, '');
+  // Remove leading and trailing blank lines
+  cleaned = cleaned.replace(/^\s*\n/, ''); // remove single leading blank
+  cleaned = cleaned.replace(/^\s*\n+/, ''); // remove multiple leading blank lines
+  cleaned = cleaned.replace(/\n+$/, ''); // trailing blank lines
 
-  // Remove trailing space at the end of each line for comparison
+  // Remove trailing space at the end of each line
   cleaned = cleaned
     .split('\n')
-    .map((line) => line.replace(/\s+$/, '')) // <-- remove only trailing space
+    .map((line) => line.replace(/\s+$/, ''))
     .join('\n');
 
   return cleaned;
 }
+
 
   const compareTexts = () => {
     
