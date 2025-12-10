@@ -16,6 +16,19 @@ export default function Page() {
   const lineNumbers1Ref = useRef(null)
   const lineNumbers2Ref = useRef(null)
 
+  // 🔥 NEW FUNCTION — Replace <...> with Text2 values
+  const replaceAngleBrackets = (template, replacements) => {
+    const matches = [...template.matchAll(/<([^>]+)>/g)]
+    let result = template
+
+    matches.forEach((match, index) => {
+      const replacement = replacements[index] || ""
+      result = result.replace(match[0], replacement.trim())
+    })
+
+    return result
+  }
+
   const cleanText = (input) => {
     let result = input
     if (removeExtraLines) {
@@ -36,6 +49,9 @@ export default function Page() {
 
   const cleanedText1 = cleanText(text1)
   const cleanedText2 = cleanText(text2)
+
+  // ▶️ Final replaced result
+  const finalOutput = replaceAngleBrackets(cleanedText1, cleanedText2.split("\n"))
 
   const lineNumbers = (text) =>
     text.split("\n").map((_, idx) => (
@@ -78,8 +94,7 @@ export default function Page() {
   }
 
   const handleCopy = () => {
-    const textToCopy = cleanedText1 + "\n\n" + cleanedText2
-    navigator.clipboard.writeText(textToCopy)
+    navigator.clipboard.writeText(finalOutput)
     setCopied(true)
     setTimeout(() => setCopied(false), 1500)
   }
@@ -166,7 +181,7 @@ export default function Page() {
               ref={container2Ref}
               value={text2}
               onChange={(e) => setText2(e.target.value)}
-              placeholder="Paste second text here..."
+              placeholder="Paste second text here (values for <...> in order)..."
               className="w-full h-80 p-4 pl-12 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 resize-none"
             />
           </div>
@@ -181,7 +196,7 @@ export default function Page() {
           </button>
           <button
             onClick={handleCopy}
-            disabled={!cleanedText1 && !cleanedText2}
+            disabled={!finalOutput}
             className="flex items-center gap-1.5 px-6 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:bg-slate-400 disabled:cursor-not-allowed rounded-lg"
           >
             {copied ? (
@@ -190,12 +205,21 @@ export default function Page() {
               </>
             ) : (
               <>
-                <Copy className="w-4 h-4" /> Copy Both
+                <Copy className="w-4 h-4" /> Copy Output
               </>
             )}
           </button>
         </div>
 
+        {/* 🔥 PROCESSED OUTPUT */}
+        <div className="mt-10">
+          <h2 className="text-lg font-semibold mb-2">Processed Output</h2>
+          <pre className="p-4 bg-slate-100 dark:bg-slate-800 rounded-lg overflow-auto text-sm">
+            {finalOutput}
+          </pre>
+        </div>
+
+        {/* ORIGINAL DIFFS */}
         <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
           <pre
             className="p-4 bg-slate-100 dark:bg-slate-800 rounded-lg overflow-auto text-sm"

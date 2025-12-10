@@ -32,20 +32,20 @@ export default function Home() {
       ],
       route: "/text-compare",
     },
-    // {
-    //   id: "clean-and-compare",
-    //   icon: Layers,
-    //   title: "Clean & Compare",
-    //   description:
-    //     "Combine text cleaning and comparison in one powerful tool.",
-    //   features: [
-    //     "Auto-clean both texts",
-    //     "Side-by-side comparison",
-    //     "Configurable cleaning options",
-    //     "Word-level highlights",
-    //   ],
-    //   route: "/clean-and-compare",
-    // },
+    {
+      id: "clean-and-compare",
+      icon: Layers,
+      title: "Clean & Compare",
+      description:
+        "Combine text cleaning and comparison in one powerful tool.",
+      features: [
+        "Auto-clean both texts",
+        "Side-by-side comparison",
+        "Configurable cleaning options",
+        "Word-level highlights",
+      ],
+      route: "/clean-and-compare",
+    },
   ]
 
   return (

@@ -148,35 +148,44 @@ const mergeSingleLine = (idx, source) => {
     setRemoveSpaces2(val)
     setText2(cleanText(rawText2, removeExtraLines2, val))
   }
+// Escape HTML so pasted code doesn't execute
+const escapeHtml = (str = "") =>
+  str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 
   // ----------------------
   // WORD-LEVEL HIGHLIGHTING
   // ----------------------
-  const highlightWords = (oldText, newText) => {
-    const diffs = diffWords(oldText, newText)
+ const highlightWords = (oldText, newText) => {
+  const diffs = diffWords(oldText, newText);
 
-    return {
-      left: diffs
-        .map((part) =>
-          part.removed
-            ? `<span class="bg-red-300 dark:bg-red-700">${part.value}</span>`
-            : !part.added
-            ? part.value
-            : ''
-        )
-        .join(''),
+  return {
+    left: diffs
+      .map((part) =>
+        part.removed
+          ? `<span class="bg-red-300 dark:bg-red-700">${escapeHtml(part.value)}</span>`
+          : !part.added
+          ? escapeHtml(part.value)
+          : ""
+      )
+      .join(""),
 
-      right: diffs
-        .map((part) =>
-          part.added
-            ? `<span class="bg-green-300 dark:bg-green-700">${part.value}</span>`
-            : !part.removed
-            ? part.value
-            : ''
-        )
-        .join('')
-    }
-  }
+    right: diffs
+      .map((part) =>
+        part.added
+          ? `<span class="bg-green-300 dark:bg-green-700">${escapeHtml(part.value)}</span>`
+          : !part.removed
+          ? escapeHtml(part.value)
+          : ""
+      )
+      .join("")
+  };
+};
+
 
   // ----------------------
   // Compare
@@ -387,45 +396,47 @@ const compareTexts = () => {
         const globalIdx = lineCounter - 1; // index inside aligned[]
 
         return (
-          <div key={`${gIdx}-${idx}`} className="flex items-center">
-            
-            {/* Line number */}
-            <span className="inline-block min-w-[5ch] text-right pr-2 text-slate-400 dark:text-slate-500 select-none">
-              {lineCounter}
-            </span>
+        <div key={`${gIdx}-${idx}`} className="mb-2">
+  
+  {/* Line row (number + text) */}
+  <div className="flex items-center">
+    <span className="inline-block min-w-[5ch] text-right pr-2 text-slate-400 dark:text-slate-500 select-none">
+      {lineCounter}
+    </span>
 
-            {/* Highlighted text */}
-          <span
-  onClick={() => {
-    if (cell.type !== "unchanged") setActiveLine(globalIdx);
-  }}
-  className={`
-    text-slate-700 dark:text-slate-300 px-1 flex-1 cursor-pointer overflow-y-auto
-    ${cell.type !== "unchanged" ? "hover:bg-yellow-200 dark:hover:bg-yellow-700" : ""}
-  `}
-  dangerouslySetInnerHTML={{ __html: cell.text || "" }}
-/>
-{activeLine === globalIdx && (
-  <div className="ml-2 flex gap-2">
-    <button
-      onClick={() => mergeSingleLine(globalIdx, "left")}
-      className="px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700"
-    >
-      Merge from Text 1
-    </button>
-    <button
-      onClick={() => mergeSingleLine(globalIdx, "right")}
-      className="px-2 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700"
-    >
-      Merge from Text 2
-    </button>
+    <span
+      onClick={() => {
+        if (cell.type !== "unchanged") setActiveLine(globalIdx);
+      }}
+      className={`
+        text-slate-700 dark:text-slate-300 px-1 flex-1 cursor-pointer
+        ${cell.type !== "unchanged" ? "hover:bg-yellow-200 dark:hover:bg-yellow-700" : ""}
+      `}
+      dangerouslySetInnerHTML={{ __html: cell.text || "" }}
+    />
   </div>
-)}
 
+  {/* Merge buttons BELOW the line */}
+  {activeLine === globalIdx && (
+    <div className="mt-2 ml-[5ch] flex gap-2">
+      <button
+        onClick={() => mergeSingleLine(globalIdx, "left")}
+        className="px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700"
+      >
+        Merge from Text 1
+      </button>
 
-            {/* L/R merge buttons — only show for changed lines */}
-           
-          </div>
+      <button
+        onClick={() => mergeSingleLine(globalIdx, "right")}
+        className="px-2 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700"
+      >
+        Merge from Text 2
+      </button>
+    </div>
+  )}
+
+</div>
+
         );
       })}
     </div>
