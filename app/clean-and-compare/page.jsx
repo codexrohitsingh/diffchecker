@@ -187,14 +187,14 @@ console.log("Final output:", finalOutput)
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {dynamicFields.map((field) => (
               <div key={field} className="flex flex-col">
-                <label className="text-sm text-slate-600 dark:text-slate-300 mb-1">
+                <label className="text-sm text-slate-600  dark:text-white  mb-1">
                   {field}
                 </label>
                 <input
                   type="text"
                   value={settings[normalizeKey(field)] || ""}
                   onChange={(e) => updateSetting(field, e.target.value)}
-                  className="p-2 border rounded text-slate-600  bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
+                  className="p-2 border rounded text-slate-600  dark:text-white bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
                 />
               </div>
             ))}
@@ -246,7 +246,7 @@ console.log("Final output:", finalOutput)
             value={text1}
             onChange={(e) => setText1(e.target.value)}
             placeholder="Paste template with <Dynamic ...> fields..."
-            className="w-full h-80 p-4 text-sm text-slate-600 font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg resize-none"
+            className="w-full h-80 p-4 text-sm text-slate-600  dark:text-white font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg resize-none"
           />
         </div>
 
@@ -271,7 +271,7 @@ console.log("Final output:", finalOutput)
         {/* OUTPUT */}
         <div className="mt-10">
           <h2 className="text-lg text-slate-600 font-semibold mb-2">Processed Output</h2>
-          <pre className="p-4 bg-slate-100 text-slate-600 dark:bg-slate-800 rounded-lg overflow-auto text-sm">
+          <pre className="p-4 bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-white rounded-lg overflow-auto text-sm">
             {finalOutput}
           </pre>
         </div>
