@@ -701,6 +701,7 @@ const compareTexts = () => {
                 <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                   {countLines(diffResult.aligned, 'left', 'unchanged')}
                 </p>
+                {/* console.log("hi there") */}
               </div>
             </div>
           </div>
