@@ -33,7 +33,7 @@ export default function Home() {
       route: "/text-compare",
     },
     {
-      id: "clean-and-compare",
+      id: "Sab ka Babujee",
       icon: Layers,
       title: "Clean & Compare",
       description:
