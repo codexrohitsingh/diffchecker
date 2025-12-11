@@ -3,10 +3,6 @@
 import React, { useState, useEffect, useMemo } from "react"
 import { Copy, Check, ArrowLeft } from "lucide-react"
 import Link from "next/link"
-import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf"
-import mammoth from "mammoth"
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
 
 export default function Page() {
   // -------------------------
@@ -44,20 +40,36 @@ export default function Page() {
     "Denoise By Default",
     "E",
   ]
+// const keyMapping = {
+//   "LANGUAGE": "dynamic language",
+//   "MEDIA OUTLET TYPE": "dynamic media outlet type",
+//   "BRAND NAME": "dynamic brand name",
+//   "CONTENT": "dynamic content",
+//   "REGION": "dynamic region",
+//   "SCRIPT": "dynamic script",
+//   "HEADLINE CHARACTER": "dynamic headline character",
+//   "TV CAPTION CHARACTERS": "dynamic tv caption character",
+//   "DESCRIPTOR LENGTH": "dynamic descriptor length",
+//   "KEYWORD NUMBER": "dynamic keyword number",
+//   "HASHTAG NUMBER": "dynamic hashtag number"
+//   // add others as needed
+// }
 
   // -------------------------
   // SETTINGS + LOCAL STORAGE
   // -------------------------
   const [settings, setSettings] = useState({})
 
-  const normalizeKey = (k) =>
-    String(k || "").trim().toLowerCase().replace(/\s+/g, " ")
+const normalizeKey = (k) =>
+  String(k || "").trim().toLowerCase().replace(/\s+/g, " ");
+
 
   useEffect(() => {
     const saved = localStorage.getItem("dynamicSettings")
     if (saved) {
       try {
         const parsed = JSON.parse(saved)
+        // normalize keys on load so lookups are consistent
         const normalized = Object.fromEntries(
           Object.entries(parsed).map(([k, v]) => [normalizeKey(k), v])
         )
@@ -73,73 +85,6 @@ export default function Page() {
     const updated = { ...settings, [k]: value }
     setSettings(updated)
     localStorage.setItem("dynamicSettings", JSON.stringify(updated))
-  }
-
-  // -------------------------
-  // FILE UPLOAD & EXTRACTION
-  // -------------------------
-  const handleFileUpload = async (e) => {
-    const file = e.target.files[0]
-    if (!file) return
-
-    let text = ""
-    if (file.type === "application/pdf") {
-      text = await extractPDFText(file)
-    } else if (file.name.endsWith(".docx")) {
-      text = await extractDocxText(file)
-    } else {
-      text = await file.text()
-    }
-
-    autoFillDynamicValues(text)
-  }
-
-  const extractPDFText = async (file) => {
-    const arrayBuffer = await file.arrayBuffer()
-    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
-    let extracted = ""
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i)
-      const textContent = await page.getTextContent()
-      extracted += textContent.items.map((it) => it.str).join(" ") + "\n"
-    }
-    return extracted
-  }
-
-  const extractDocxText = async (file) => {
-    const arrayBuffer = await file.arrayBuffer()
-    const result = await mammoth.extractRawText({ arrayBuffer })
-    return result.value
-  }
-
-  const autoFillDynamicValues = (text) => {
-    const keyMapping = {
-      "LANGUAGE": "dynamic language",
-      "MEDIA OUTLET TYPE": "dynamic media outlet type",
-      "BRAND NAME": "dynamic brand name",
-      "CONTENT": "dynamic content",
-      "REGION": "dynamic region",
-      "SCRIPT": "dynamic script",
-      "HEADLINE CHARACTER": "dynamic headline character",
-      "TV CAPTION CHARACTERS": "dynamic tv caption character",
-      "DESCRIPTOR LENGTH": "dynamic descriptor length",
-      "KEYWORD NUMBER": "dynamic keyword number",
-      "HASHTAG NUMBER": "dynamic hashtag number",
-    }
-
-    const newSettings = { ...settings }
-
-    for (const [inputKey, settingKey] of Object.entries(keyMapping)) {
-      const regex = new RegExp(`${inputKey}\\s*[:=]\\s*(.+)`, "i")
-      const match = text.match(regex)
-      if (match) {
-        const value = match[1].trim()
-        newSettings[normalizeKey(settingKey)] = value
-      }
-    }
-
-    setSettings(newSettings)
-    localStorage.setItem("dynamicSettings", JSON.stringify(newSettings))
   }
 
   // -------------------------
@@ -166,34 +111,43 @@ export default function Page() {
   // -------------------------
   // FINAL OUTPUT (with dynamic replacement)
   // -------------------------
-  const finalOutput = useMemo(() => {
-    const cleaned = cleanText(text1)
-    const normalizedSettings = Object.fromEntries(
-      Object.entries(settings || {}).map(([k, v]) => [normalizeKey(k), v])
-    )
+  // The regex below looks for something like:
+  //  <Whatever> ((DYNAMIC: some key here))
+  // It extracts the `some key here` part and does a normalized lookup into settings.
+const finalOutput = useMemo(() => {
+  const cleaned = cleanText(text1)
 
-    const keyMapping = {
-      "LANGUAGE": "dynamic language",
-      "MEDIA OUTLET TYPE": "dynamic media outlet type",
-      "BRAND NAME": "dynamic brand name",
-      "CONTENT": "dynamic content",
-      "REGION": "dynamic region",
-      "SCRIPT": "dynamic script",
-      "HEADLINE CHARACTER": "dynamic headline character",
-      "TV CAPTION CHARACTERS": "dynamic tv caption character",
-      "DESCRIPTOR LENGTH": "dynamic descriptor length",
-      "KEYWORD NUMBER": "dynamic keyword number",
-      "HASHTAG NUMBER": "dynamic hashtag number"
-    }
+  // Build normalized settings map
+  const normalizedSettings = Object.fromEntries(
+    Object.entries(settings || {}).map(([k, v]) => [normalizeKey(k), v])
+  )
 
-    const regex = /<[^>]+>\s*\(\(\s*DYNAMIC:\s*([^)]+?)\s*\)\)/gi
+  // Mapping template keys to settings keys
+  const keyMapping = {
+    "LANGUAGE": "dynamic language",
+    "MEDIA OUTLET TYPE": "dynamic media outlet type",
+    "BRAND NAME": "dynamic brand name",
+    "CONTENT": "dynamic content",
+    "REGION": "dynamic region",
+    "SCRIPT": "dynamic script",
+    "HEADLINE CHARACTER": "dynamic headline character",
+    "TV CAPTION CHARACTERS": "dynamic tv caption character",
+    "DESCRIPTOR LENGTH": "dynamic descriptor length",
+    "KEYWORD NUMBER": "dynamic keyword number",
+    "HASHTAG NUMBER": "dynamic hashtag number"
+  }
 
-    return cleaned.replace(regex, (_, dynKeyRaw) => {
-      const mappedKey = keyMapping[dynKeyRaw.trim()] || dynKeyRaw
-      const normalizedKey = normalizeKey(mappedKey)
-      return normalizedSettings[normalizedKey] || ""
-    })
-  }, [text1, settings, removeExtraLines, removeInitialSpaces])
+  // Regex to capture optional <...> immediately before ((DYNAMIC: KEY))
+  const regex = /<[^>]+>\s*\(\(\s*DYNAMIC:\s*([^)]+?)\s*\)\)/gi
+
+  return cleaned.replace(regex, (_, dynKeyRaw) => {
+    const mappedKey = keyMapping[dynKeyRaw.trim()] || dynKeyRaw
+    const normalizedKey = normalizeKey(mappedKey)
+
+    return normalizedSettings[normalizedKey] || ""
+  })
+}, [text1, settings, removeExtraLines, removeInitialSpaces])
+
 
   // -------------------------
   // COPY HANDLER
@@ -207,6 +161,9 @@ export default function Page() {
       console.error("Copy failed", e)
     }
   }
+console.log("Text input:", text1)
+console.log("Normalized settings:", settings)
+console.log("Final output:", finalOutput)
 
   // -------------------------
   // UI RENDER
@@ -214,6 +171,7 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-white to-slate-50 dark:from-slate-950 dark:to-slate-900 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         <Link
           href="/"
           className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
@@ -221,19 +179,6 @@ export default function Page() {
           <ArrowLeft className="w-4 h-4" />
           Back to Home
         </Link>
-
-        {/* ============== FILE UPLOAD ============== */}
-        <div className="mb-6 p-4 bg-white dark:bg-slate-900 rounded-lg border dark:border-slate-700">
-          <label className="block mb-2 font-medium text-slate-700 dark:text-slate-300">
-            Upload file with dynamic values
-          </label>
-          <input
-            type="file"
-            accept=".pdf,.doc,.docx,.txt"
-            onChange={handleFileUpload}
-            className="p-2 border rounded bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
-          />
-        </div>
 
         {/* ============== SETTINGS PANEL ============== */}
         <div className="mb-10 p-4 bg-white dark:bg-slate-900 rounded-lg border dark:border-slate-700">
@@ -334,7 +279,3 @@ export default function Page() {
     </main>
   )
 }
-
-
-
-

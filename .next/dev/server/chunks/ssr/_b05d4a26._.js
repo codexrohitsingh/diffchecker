@@ -2,309 +2,6 @@ module.exports = [
 "[project]/app/clean-and-compare/page.jsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
-// "use client"
-// import React, { useState, useEffect, useMemo } from "react"
-// import { Copy, Check, ArrowLeft } from "lucide-react"
-// import Link from "next/link"
-// import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf"
-// import mammoth from "mammoth"
-// pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
-// export default function Page() {
-//   // -------------------------
-//   // TEXT INPUTS
-//   // -------------------------
-//   const [text1, setText1] = useState("")
-//   const [removeExtraLines, setRemoveExtraLines] = useState(true)
-//   const [removeInitialSpaces, setRemoveInitialSpaces] = useState(true)
-//   const [copied, setCopied] = useState(false)
-//   // -------------------------
-//   // FIXED DYNAMIC FIELDS
-//   // -------------------------
-//   const dynamicFields = [
-//     "Dynamic Discussion type",
-//     "Dynamic keyword language",
-//     "Dynamic language",
-//     "Dynamic script",
-//     "Dynamic media outlet type",
-//     "Dynamic content",
-//     "Dynamic Region",
-//     "Dynamic Audience",
-//     "Dynamic Content Type",
-//     "Dynamic Entertainment show type",
-//     "Dynamic Style",
-//     "Dynamic TV Caption Character",
-//     "Dynamic Headline Character",
-//     "Dynamic Descriptor Length",
-//     "Dynamic Hashtag Number",
-//     "Dynamic Keyword Number",
-//     "Dynamic Duration Text",
-//     "Dynamic FP Target Duration",
-//     "Dynamic FP Max Duration",
-//     "FP Trigger",
-//     "Denoise By Default",
-//     "E",
-//   ]
-//   // -------------------------
-//   // SETTINGS + LOCAL STORAGE
-//   // -------------------------
-//   const [settings, setSettings] = useState({})
-//   const normalizeKey = (k) =>
-//     String(k || "").trim().toLowerCase().replace(/\s+/g, " ")
-//   useEffect(() => {
-//     const saved = localStorage.getItem("dynamicSettings")
-//     if (saved) {
-//       try {
-//         const parsed = JSON.parse(saved)
-//         const normalized = Object.fromEntries(
-//           Object.entries(parsed).map(([k, v]) => [normalizeKey(k), v])
-//         )
-//         setSettings(normalized)
-//       } catch (e) {
-//         console.warn("Failed to parse saved dynamicSettings", e)
-//       }
-//     }
-//   }, [])
-//   const updateSetting = (key, value) => {
-//     const k = normalizeKey(key)
-//     const updated = { ...settings, [k]: value }
-//     setSettings(updated)
-//     localStorage.setItem("dynamicSettings", JSON.stringify(updated))
-//   }
-//   // -------------------------
-//   // FILE UPLOAD & EXTRACTION
-//   // -------------------------
-//   const handleFileUpload = async (e) => {
-//     const file = e.target.files[0]
-//     if (!file) return
-//     let text = ""
-//     if (file.type === "application/pdf") {
-//       text = await extractPDFText(file)
-//     } else if (file.name.endsWith(".docx")) {
-//       text = await extractDocxText(file)
-//     } else {
-//       text = await file.text()
-//     }
-//     autoFillDynamicValues(text)
-//   }
-//   const extractPDFText = async (file) => {
-//     const arrayBuffer = await file.arrayBuffer()
-//     const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
-//     let extracted = ""
-//     for (let i = 1; i <= pdf.numPages; i++) {
-//       const page = await pdf.getPage(i)
-//       const textContent = await page.getTextContent()
-//       extracted += textContent.items.map((it) => it.str).join(" ") + "\n"
-//     }
-//     return extracted
-//   }
-//   const extractDocxText = async (file) => {
-//     const arrayBuffer = await file.arrayBuffer()
-//     const result = await mammoth.extractRawText({ arrayBuffer })
-//     return result.value
-//   }
-//   const autoFillDynamicValues = (text) => {
-//     const keyMapping = {
-//       "LANGUAGE": "dynamic language",
-//       "MEDIA OUTLET TYPE": "dynamic media outlet type",
-//       "BRAND NAME": "dynamic brand name",
-//       "CONTENT": "dynamic content",
-//       "REGION": "dynamic region",
-//       "SCRIPT": "dynamic script",
-//       "HEADLINE CHARACTER": "dynamic headline character",
-//       "TV CAPTION CHARACTERS": "dynamic tv caption character",
-//       "DESCRIPTOR LENGTH": "dynamic descriptor length",
-//       "KEYWORD NUMBER": "dynamic keyword number",
-//       "HASHTAG NUMBER": "dynamic hashtag number",
-//     }
-//     const newSettings = { ...settings }
-//     for (const [inputKey, settingKey] of Object.entries(keyMapping)) {
-//       const regex = new RegExp(`${inputKey}\\s*[:=]\\s*(.+)`, "i")
-//       const match = text.match(regex)
-//       if (match) {
-//         const value = match[1].trim()
-//         newSettings[normalizeKey(settingKey)] = value
-//       }
-//     }
-//     setSettings(newSettings)
-//     localStorage.setItem("dynamicSettings", JSON.stringify(newSettings))
-//   }
-//   // -------------------------
-//   // TEXT CLEANING
-//   // -------------------------
-//   const cleanText = (input) => {
-//     let result = input || ""
-//     if (removeExtraLines) {
-//       result = result
-//         .replace(/\n{2,}/g, "\n")
-//         .split("\n")
-//         .filter((line) => line.trim() !== "")
-//         .join("\n")
-//     }
-//     if (removeInitialSpaces) {
-//       result = result
-//         .split("\n")
-//         .map((line) => line.trimStart())
-//         .join("\n")
-//     }
-//     return result
-//   }
-//   // -------------------------
-//   // FINAL OUTPUT (with dynamic replacement)
-//   // -------------------------
-//   const finalOutput = useMemo(() => {
-//     const cleaned = cleanText(text1)
-//     const normalizedSettings = Object.fromEntries(
-//       Object.entries(settings || {}).map(([k, v]) => [normalizeKey(k), v])
-//     )
-//     const keyMapping = {
-//       "LANGUAGE": "dynamic language",
-//       "MEDIA OUTLET TYPE": "dynamic media outlet type",
-//       "BRAND NAME": "dynamic brand name",
-//       "CONTENT": "dynamic content",
-//       "REGION": "dynamic region",
-//       "SCRIPT": "dynamic script",
-//       "HEADLINE CHARACTER": "dynamic headline character",
-//       "TV CAPTION CHARACTERS": "dynamic tv caption character",
-//       "DESCRIPTOR LENGTH": "dynamic descriptor length",
-//       "KEYWORD NUMBER": "dynamic keyword number",
-//       "HASHTAG NUMBER": "dynamic hashtag number"
-//     }
-//     const regex = /<[^>]+>\s*\(\(\s*DYNAMIC:\s*([^)]+?)\s*\)\)/gi
-//     return cleaned.replace(regex, (_, dynKeyRaw) => {
-//       const mappedKey = keyMapping[dynKeyRaw.trim()] || dynKeyRaw
-//       const normalizedKey = normalizeKey(mappedKey)
-//       return normalizedSettings[normalizedKey] || ""
-//     })
-//   }, [text1, settings, removeExtraLines, removeInitialSpaces])
-//   // -------------------------
-//   // COPY HANDLER
-//   // -------------------------
-//   const handleCopy = async () => {
-//     try {
-//       await navigator.clipboard.writeText(finalOutput)
-//       setCopied(true)
-//       setTimeout(() => setCopied(false), 1500)
-//     } catch (e) {
-//       console.error("Copy failed", e)
-//     }
-//   }
-//   // -------------------------
-//   // UI RENDER
-//   // -------------------------
-//   return (
-//     <main className="min-h-screen bg-gradient-to-br from-white to-slate-50 dark:from-slate-950 dark:to-slate-900 py-8">
-//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-//         <Link
-//           href="/"
-//           className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-//         >
-//           <ArrowLeft className="w-4 h-4" />
-//           Back to Home
-//         </Link>
-//         {/* ============== FILE UPLOAD ============== */}
-//         <div className="mb-6 p-4 bg-white dark:bg-slate-900 rounded-lg border dark:border-slate-700">
-//           <label className="block mb-2 font-medium text-slate-700 dark:text-slate-300">
-//             Upload file with dynamic values
-//           </label>
-//           <input
-//             type="file"
-//             accept=".pdf,.doc,.docx,.txt"
-//             onChange={handleFileUpload}
-//             className="p-2 border rounded bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
-//           />
-//         </div>
-//         {/* ============== SETTINGS PANEL ============== */}
-//         <div className="mb-10 p-4 bg-white dark:bg-slate-900 rounded-lg border dark:border-slate-700">
-//           <h2 className="text-lg font-semibold mb-4">Dynamic Settings</h2>
-//           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//             {dynamicFields.map((field) => (
-//               <div key={field} className="flex flex-col">
-//                 <label className="text-sm text-slate-600 dark:text-slate-300 mb-1">
-//                   {field}
-//                 </label>
-//                 <input
-//                   type="text"
-//                   value={settings[normalizeKey(field)] || ""}
-//                   onChange={(e) => updateSetting(field, e.target.value)}
-//                   className="p-2 border rounded bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
-//                 />
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//         {/* OPTIONS */}
-//         <div className="flex flex-wrap gap-4 mb-8 pb-8 border-b border-slate-200 dark:border-slate-800">
-//           <label className="flex items-center gap-3 cursor-pointer select-none">
-//             <div
-//               onClick={() => setRemoveExtraLines(!removeExtraLines)}
-//               className={`w-11 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors ${
-//                 removeExtraLines ? "bg-blue-600" : "bg-slate-300 dark:bg-slate-700"
-//               }`}
-//             >
-//               <div
-//                 className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${
-//                   removeExtraLines ? "translate-x-5" : ""
-//                 }`}
-//               />
-//             </div>
-//             <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-//               Remove extra blank lines
-//             </span>
-//           </label>
-//           <label className="flex items-center gap-3 cursor-pointer select-none">
-//             <div
-//               onClick={() => setRemoveInitialSpaces(!removeInitialSpaces)}
-//               className={`w-11 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors ${
-//                 removeInitialSpaces ? "bg-blue-600" : "bg-slate-300 dark:bg-slate-700"
-//               }`}
-//             >
-//               <div
-//                 className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${
-//                   removeInitialSpaces ? "translate-x-5" : ""
-//                 }`}
-//               />
-//             </div>
-//             <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-//               Remove leading spaces
-//             </span>
-//           </label>
-//         </div>
-//         {/* TEMPLATE INPUT */}
-//         <div className="mb-6">
-//           <textarea
-//             value={text1}
-//             onChange={(e) => setText1(e.target.value)}
-//             placeholder="Paste template with <Dynamic ...> fields..."
-//             className="w-full h-80 p-4 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg resize-none"
-//           />
-//         </div>
-//         {/* ACTIONS */}
-//         <div className="flex gap-3">
-//           <button
-//             onClick={() => setText1(cleanText(text1))}
-//             className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg"
-//           >
-//             Clean Text
-//           </button>
-//           <button
-//             onClick={handleCopy}
-//             disabled={!finalOutput}
-//             className="flex items-center gap-1.5 px-6 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:bg-slate-400 disabled:cursor-not-allowed rounded-lg"
-//           >
-//             {copied ? <><Check className="w-4 h-4" /> Copied</> : <><Copy className="w-4 h-4" /> Copy Output</>}
-//           </button>
-//         </div>
-//         {/* OUTPUT */}
-//         <div className="mt-10">
-//           <h2 className="text-lg font-semibold mb-2">Processed Output</h2>
-//           <pre className="p-4 bg-slate-100 dark:bg-slate-800 rounded-lg overflow-auto text-sm">
-//             {finalOutput}
-//           </pre>
-//         </div>
-//       </div>
-//     </main>
-//   )
-// }
 __turbopack_context__.s([
     "default",
     ()=>Page
@@ -483,14 +180,14 @@ function Page() {
                             className: "w-4 h-4"
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 521,
+                            lineNumber: 179,
                             columnNumber: 11
                         }, this),
                         "Back to Home"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                    lineNumber: 517,
+                    lineNumber: 175,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -501,7 +198,7 @@ function Page() {
                             children: "Dynamic Settings"
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 527,
+                            lineNumber: 185,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -514,7 +211,7 @@ function Page() {
                                             children: field
                                         }, void 0, false, {
                                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                                            lineNumber: 532,
+                                            lineNumber: 190,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -524,24 +221,24 @@ function Page() {
                                             className: "p-2 border rounded bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
                                         }, void 0, false, {
                                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                                            lineNumber: 535,
+                                            lineNumber: 193,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, field, true, {
                                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                                    lineNumber: 531,
+                                    lineNumber: 189,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 529,
+                            lineNumber: 187,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                    lineNumber: 526,
+                    lineNumber: 184,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -557,12 +254,12 @@ function Page() {
                                         className: `bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${removeExtraLines ? "translate-x-5" : ""}`
                                     }, void 0, false, {
                                         fileName: "[project]/app/clean-and-compare/page.jsx",
-                                        lineNumber: 555,
+                                        lineNumber: 213,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                                    lineNumber: 549,
+                                    lineNumber: 207,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -570,13 +267,13 @@ function Page() {
                                     children: "Remove extra blank lines"
                                 }, void 0, false, {
                                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                                    lineNumber: 561,
+                                    lineNumber: 219,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 548,
+                            lineNumber: 206,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -589,12 +286,12 @@ function Page() {
                                         className: `bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${removeInitialSpaces ? "translate-x-5" : ""}`
                                     }, void 0, false, {
                                         fileName: "[project]/app/clean-and-compare/page.jsx",
-                                        lineNumber: 573,
+                                        lineNumber: 231,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                                    lineNumber: 567,
+                                    lineNumber: 225,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -602,19 +299,19 @@ function Page() {
                                     children: "Remove leading spaces"
                                 }, void 0, false, {
                                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                                    lineNumber: 579,
+                                    lineNumber: 237,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 566,
+                            lineNumber: 224,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                    lineNumber: 547,
+                    lineNumber: 205,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -626,12 +323,12 @@ function Page() {
                         className: "w-full h-80 p-4 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg resize-none"
                     }, void 0, false, {
                         fileName: "[project]/app/clean-and-compare/page.jsx",
-                        lineNumber: 587,
+                        lineNumber: 245,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                    lineNumber: 586,
+                    lineNumber: 244,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -643,7 +340,7 @@ function Page() {
                             children: "Clean Text"
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 597,
+                            lineNumber: 255,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -656,7 +353,7 @@ function Page() {
                                         className: "w-4 h-4"
                                     }, void 0, false, {
                                         fileName: "[project]/app/clean-and-compare/page.jsx",
-                                        lineNumber: 609,
+                                        lineNumber: 267,
                                         columnNumber: 25
                                     }, this),
                                     " Copied"
@@ -667,7 +364,7 @@ function Page() {
                                         className: "w-4 h-4"
                                     }, void 0, false, {
                                         fileName: "[project]/app/clean-and-compare/page.jsx",
-                                        lineNumber: 609,
+                                        lineNumber: 267,
                                         columnNumber: 69
                                     }, this),
                                     " Copy Output"
@@ -675,13 +372,13 @@ function Page() {
                             }, void 0, true)
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 604,
+                            lineNumber: 262,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                    lineNumber: 596,
+                    lineNumber: 254,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -692,7 +389,7 @@ function Page() {
                             children: "Processed Output"
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 615,
+                            lineNumber: 273,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("pre", {
@@ -700,24 +397,24 @@ function Page() {
                             children: finalOutput
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 616,
+                            lineNumber: 274,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                    lineNumber: 614,
+                    lineNumber: 272,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/clean-and-compare/page.jsx",
-            lineNumber: 515,
+            lineNumber: 173,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/clean-and-compare/page.jsx",
-        lineNumber: 514,
+        lineNumber: 172,
         columnNumber: 5
     }, this);
 }
