@@ -203,7 +203,7 @@ function Page() {
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "mb-10 p-4 bg-white dark:bg-slate-900 rounded-lg border dark:border-slate-700",
+                    className: "mb-10 p-4 bg-white text-slate-600 dark:bg-slate-900 rounded-lg border dark:border-slate-700",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                             className: "text-lg font-semibold mb-4",
@@ -230,7 +230,7 @@ function Page() {
                                             type: "text",
                                             value: settings[normalizeKey(field)] || "",
                                             onChange: (e)=>updateSetting(field, e.target.value),
-                                            className: "p-2 border rounded bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
+                                            className: "p-2 border rounded text-slate-600  bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
                                         }, void 0, false, {
                                             fileName: "[project]/app/clean-and-compare/page.jsx",
                                             lineNumber: 193,
@@ -332,7 +332,7 @@ function Page() {
                         value: text1,
                         onChange: (e)=>setText1(e.target.value),
                         placeholder: "Paste template with <Dynamic ...> fields...",
-                        className: "w-full h-80 p-4 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg resize-none"
+                        className: "w-full h-80 p-4 text-sm text-slate-600 font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg resize-none"
                     }, void 0, false, {
                         fileName: "[project]/app/clean-and-compare/page.jsx",
                         lineNumber: 245,
@@ -397,7 +397,7 @@ function Page() {
                     className: "mt-10",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                            className: "text-lg font-semibold mb-2",
+                            className: "text-lg text-slate-600 font-semibold mb-2",
                             children: "Processed Output"
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
@@ -405,7 +405,7 @@ function Page() {
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("pre", {
-                            className: "p-4 bg-slate-100 dark:bg-slate-800 rounded-lg overflow-auto text-sm",
+                            className: "p-4 bg-slate-100 text-slate-600 dark:bg-slate-800 rounded-lg overflow-auto text-sm",
                             children: finalOutput
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",

@@ -181,7 +181,7 @@ console.log("Final output:", finalOutput)
         </Link>
 
         {/* ============== SETTINGS PANEL ============== */}
-        <div className="mb-10 p-4 bg-white dark:bg-slate-900 rounded-lg border dark:border-slate-700">
+        <div className="mb-10 p-4 bg-white text-slate-600 dark:bg-slate-900 rounded-lg border dark:border-slate-700">
           <h2 className="text-lg font-semibold mb-4">Dynamic Settings</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -194,7 +194,7 @@ console.log("Final output:", finalOutput)
                   type="text"
                   value={settings[normalizeKey(field)] || ""}
                   onChange={(e) => updateSetting(field, e.target.value)}
-                  className="p-2 border rounded bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
+                  className="p-2 border rounded text-slate-600  bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
                 />
               </div>
             ))}
@@ -246,7 +246,7 @@ console.log("Final output:", finalOutput)
             value={text1}
             onChange={(e) => setText1(e.target.value)}
             placeholder="Paste template with <Dynamic ...> fields..."
-            className="w-full h-80 p-4 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg resize-none"
+            className="w-full h-80 p-4 text-sm text-slate-600 font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg resize-none"
           />
         </div>
 
@@ -270,8 +270,8 @@ console.log("Final output:", finalOutput)
 
         {/* OUTPUT */}
         <div className="mt-10">
-          <h2 className="text-lg font-semibold mb-2">Processed Output</h2>
-          <pre className="p-4 bg-slate-100 dark:bg-slate-800 rounded-lg overflow-auto text-sm">
+          <h2 className="text-lg text-slate-600 font-semibold mb-2">Processed Output</h2>
+          <pre className="p-4 bg-slate-100 text-slate-600 dark:bg-slate-800 rounded-lg overflow-auto text-sm">
             {finalOutput}
           </pre>
         </div>
