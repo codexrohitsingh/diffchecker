@@ -33,9 +33,9 @@ export default function Home() {
       route: "/text-compare",
     },
     {
-      id: "Sab ka Babujee",
+      id: "clean-and-compare",
       icon: Layers,
-      title: "Clean & Compare",
+      title: "Sab ka babujee",
       description:
         "Combine text cleaning and comparison in one powerful tool.",
       features: [
