@@ -35,7 +35,7 @@ export default function Home() {
     {
       id: "clean-and-compare",
       icon: Layers,
-      title: "Sab ka babujee",
+      title: "Dynamic value updater",
       description:
         "Combine text cleaning and comparison in one powerful tool.",
       features: [
@@ -50,8 +50,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-white to-slate-50 dark:from-slate-950 dark:to-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div className="text-center mb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
             Professional Text <span className="text-blue-600 dark:text-blue-400">Processing Tools</span>
           </h1>
@@ -73,7 +73,7 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="mt-20 pt-12 border-t border-slate-200 dark:border-slate-800">
+        <div className="mt-10 pt-12 border-t border-slate-200 dark:border-slate-800">
           <div className="text-center text-sm text-slate-600 dark:text-slate-400">
             <p>More tools coming soon. Start with any of our products above.</p>
           </div>
