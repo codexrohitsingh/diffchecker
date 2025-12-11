@@ -96,6 +96,10 @@ function Page() {
         setSettings(updated);
         localStorage.setItem("dynamicSettings", JSON.stringify(updated));
     };
+    const handleClearSettings = ()=>{
+        setSettings({}); // clears React state
+        localStorage.removeItem("dynamicSettings"); // deletes saved data
+    };
     // -------------------------
     // TEXT CLEANING
     // -------------------------
@@ -180,14 +184,14 @@ function Page() {
                             className: "w-4 h-4"
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 179,
+                            lineNumber: 183,
                             columnNumber: 11
                         }, this),
                         "Back to Home"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                    lineNumber: 175,
+                    lineNumber: 179,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -198,8 +202,17 @@ function Page() {
                             children: "Dynamic Settings"
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 185,
+                            lineNumber: 189,
                             columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                            onClick: handleClearSettings,
+                            className: "mb-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700",
+                            children: "Clear All Dynamic Settings"
+                        }, void 0, false, {
+                            fileName: "[project]/app/clean-and-compare/page.jsx",
+                            lineNumber: 190,
+                            columnNumber: 1
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "grid grid-cols-1 md:grid-cols-2 gap-4",
@@ -211,7 +224,7 @@ function Page() {
                                             children: field
                                         }, void 0, false, {
                                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                                            lineNumber: 190,
+                                            lineNumber: 200,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -221,24 +234,24 @@ function Page() {
                                             className: "p-2 border rounded text-slate-600  dark:text-white bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
                                         }, void 0, false, {
                                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                                            lineNumber: 193,
+                                            lineNumber: 203,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, field, true, {
                                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                                    lineNumber: 189,
+                                    lineNumber: 199,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 187,
+                            lineNumber: 197,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                    lineNumber: 184,
+                    lineNumber: 188,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -254,12 +267,12 @@ function Page() {
                                         className: `bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${removeExtraLines ? "translate-x-5" : ""}`
                                     }, void 0, false, {
                                         fileName: "[project]/app/clean-and-compare/page.jsx",
-                                        lineNumber: 213,
+                                        lineNumber: 223,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                                    lineNumber: 207,
+                                    lineNumber: 217,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -267,13 +280,13 @@ function Page() {
                                     children: "Remove extra blank lines"
                                 }, void 0, false, {
                                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                                    lineNumber: 219,
+                                    lineNumber: 229,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 206,
+                            lineNumber: 216,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -286,12 +299,12 @@ function Page() {
                                         className: `bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${removeInitialSpaces ? "translate-x-5" : ""}`
                                     }, void 0, false, {
                                         fileName: "[project]/app/clean-and-compare/page.jsx",
-                                        lineNumber: 231,
+                                        lineNumber: 241,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                                    lineNumber: 225,
+                                    lineNumber: 235,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -299,19 +312,19 @@ function Page() {
                                     children: "Remove leading spaces"
                                 }, void 0, false, {
                                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                                    lineNumber: 237,
+                                    lineNumber: 247,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 224,
+                            lineNumber: 234,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                    lineNumber: 205,
+                    lineNumber: 215,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -323,12 +336,12 @@ function Page() {
                         className: "w-full h-80 p-4 text-sm text-slate-600  dark:text-white font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg resize-none"
                     }, void 0, false, {
                         fileName: "[project]/app/clean-and-compare/page.jsx",
-                        lineNumber: 245,
+                        lineNumber: 255,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                    lineNumber: 244,
+                    lineNumber: 254,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -340,7 +353,7 @@ function Page() {
                             children: "Clean Text"
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 255,
+                            lineNumber: 265,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -353,7 +366,7 @@ function Page() {
                                         className: "w-4 h-4"
                                     }, void 0, false, {
                                         fileName: "[project]/app/clean-and-compare/page.jsx",
-                                        lineNumber: 267,
+                                        lineNumber: 277,
                                         columnNumber: 25
                                     }, this),
                                     " Copied"
@@ -364,7 +377,7 @@ function Page() {
                                         className: "w-4 h-4"
                                     }, void 0, false, {
                                         fileName: "[project]/app/clean-and-compare/page.jsx",
-                                        lineNumber: 267,
+                                        lineNumber: 277,
                                         columnNumber: 69
                                     }, this),
                                     " Copy Output"
@@ -372,13 +385,13 @@ function Page() {
                             }, void 0, true)
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 262,
+                            lineNumber: 272,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                    lineNumber: 254,
+                    lineNumber: 264,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -389,7 +402,7 @@ function Page() {
                             children: "Processed Output"
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 273,
+                            lineNumber: 283,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("pre", {
@@ -397,24 +410,24 @@ function Page() {
                             children: finalOutput
                         }, void 0, false, {
                             fileName: "[project]/app/clean-and-compare/page.jsx",
-                            lineNumber: 274,
+                            lineNumber: 284,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/clean-and-compare/page.jsx",
-                    lineNumber: 272,
+                    lineNumber: 282,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/clean-and-compare/page.jsx",
-            lineNumber: 173,
+            lineNumber: 177,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/clean-and-compare/page.jsx",
-        lineNumber: 172,
+        lineNumber: 176,
         columnNumber: 5
     }, this);
 }

@@ -86,6 +86,10 @@ const normalizeKey = (k) =>
     setSettings(updated)
     localStorage.setItem("dynamicSettings", JSON.stringify(updated))
   }
+const handleClearSettings = () => {
+  setSettings({})                   // clears React state
+  localStorage.removeItem("dynamicSettings") // deletes saved data
+}
 
   // -------------------------
   // TEXT CLEANING
@@ -183,6 +187,12 @@ console.log("Final output:", finalOutput)
         {/* ============== SETTINGS PANEL ============== */}
         <div className="mb-10 p-4 bg-white text-slate-600 dark:bg-slate-900 rounded-lg border dark:border-slate-700">
           <h2 className="text-lg font-semibold mb-4">Dynamic Settings</h2>
+<button
+  onClick={handleClearSettings}
+  className="mb-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+>
+  Clear All Dynamic Settings
+</button>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {dynamicFields.map((field) => (
