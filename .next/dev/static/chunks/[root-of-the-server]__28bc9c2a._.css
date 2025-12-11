@@ -515,6 +515,10 @@
     position: absolute;
   }
 
+  .fixed {
+    position: fixed;
+  }
+
   .relative {
     position: relative;
   }
@@ -613,6 +617,10 @@
 
   .mb-8 {
     margin-bottom: calc(var(--spacing) * 8);
+  }
+
+  .mb-10 {
+    margin-bottom: calc(var(--spacing) * 10);
   }
 
   .mb-16 {
@@ -788,6 +796,10 @@
 
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .flex-col {
+    flex-direction: column;
   }
 
   .flex-wrap {
@@ -1191,6 +1203,10 @@
 
   .text-yellow-400 {
     color: var(--color-yellow-400);
+  }
+
+  .lowercase {
+    text-transform: lowercase;
   }
 
   .antialiased {
