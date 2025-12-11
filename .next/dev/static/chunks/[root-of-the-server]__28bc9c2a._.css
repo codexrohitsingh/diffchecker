@@ -515,10 +515,6 @@
     position: absolute;
   }
 
-  .fixed {
-    position: fixed;
-  }
-
   .relative {
     position: relative;
   }
@@ -1203,10 +1199,6 @@
 
   .text-yellow-400 {
     color: var(--color-yellow-400);
-  }
-
-  .lowercase {
-    text-transform: lowercase;
   }
 
   .antialiased {
