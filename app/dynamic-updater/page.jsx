@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useMemo } from "react"
+import React, { useState, useEffect } from "react"
 import { Copy, Check, ArrowLeft, Sun, Moon } from "lucide-react"
 import Link from "next/link"
 
@@ -32,6 +32,9 @@ export default function Page() {
   const [removeExtraLines, setRemoveExtraLines] = useState(true)
   const [removeInitialSpaces, setRemoveInitialSpaces] = useState(true)
   const [copied, setCopied] = useState(false)
+
+  // ✅ applied output (only updates on Apply)
+  const [appliedOutput, setAppliedOutput] = useState("")
 
   // -------------------------
   // ALLOWED DYNAMIC FIELDS
@@ -111,9 +114,9 @@ export default function Page() {
   }
 
   // -------------------------
-  // FINAL OUTPUT
+  // GENERATE OUTPUT (ON APPLY)
   // -------------------------
-  const finalOutput = useMemo(() => {
+  const generateOutput = () => {
     const cleaned = cleanText(text1)
 
     const normalizedSettings = Object.fromEntries(
@@ -137,20 +140,23 @@ export default function Page() {
       "KEYWORD NUMBER": "dynamic keyword number",
     }
 
-    const regex = /<[^>]+>\s*\(\(\s*DYNAMIC:\s*([^)]+?)\s*\)\)/gi
+    const regex =
+      /<[^<>]*?>\s*\(\(\s*DYNAMIC:\s*([^)]+?)\s*\)\)/gi
 
-    return cleaned.replace(regex, (_, dynKeyRaw) => {
-      const mappedKey = keyMapping[dynKeyRaw.trim().toUpperCase()] || null
-      if (!mappedKey) return ""
-      return normalizedSettings[normalizeKey(mappedKey)] || ""
+    return cleaned.replace(regex, (fullMatch, dynKeyRaw) => {
+      const mappedKey = keyMapping[dynKeyRaw.trim().toUpperCase()]
+      if (!mappedKey) return fullMatch
+
+      const value = normalizedSettings[normalizeKey(mappedKey)]
+      return value && value.trim() !== "" ? value : fullMatch
     })
-  }, [text1, settings, removeExtraLines, removeInitialSpaces])
+  }
 
   // -------------------------
   // COPY
   // -------------------------
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(finalOutput)
+    await navigator.clipboard.writeText(appliedOutput)
     setCopied(true)
     setTimeout(() => setCopied(false), 1200)
   }
@@ -201,10 +207,10 @@ export default function Page() {
 
         <div className="flex gap-3 mt-4">
           <button
-            onClick={() => setText1(cleanText(text1))}
+            onClick={() => setAppliedOutput(generateOutput())}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg"
           >
-             Apply
+            Apply
           </button>
 
           <button
@@ -216,12 +222,14 @@ export default function Page() {
           </button>
         </div>
 
-        <div className="mt-8">
-          <h2 className="font-semibold mb-2">Processed Output</h2>
-          <pre className="p-4 rounded-lg bg-slate-100 dark:bg-slate-800 overflow-auto text-sm">
-            {finalOutput}
-          </pre>
-        </div>
+        {appliedOutput && (
+          <div className="mt-8">
+            <h2 className="font-semibold mb-2">Processed Output</h2>
+            <pre className="p-4 rounded-lg bg-slate-100 dark:bg-slate-800 overflow-auto text-sm">
+              {appliedOutput}
+            </pre>
+          </div>
+        )}
       </div>
     </main>
   )

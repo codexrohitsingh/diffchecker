@@ -33,7 +33,7 @@ export default function Home() {
       route: "/text-compare",
     },
     {
-      id: "clean-and-compare",
+      id: "dynamic-updater",
       icon: Layers,
       title: "Dynamic value updater",
       description:
@@ -44,7 +44,7 @@ export default function Home() {
         "Configurable cleaning options",
         "Word-level highlights",
       ],
-      route: "/clean-and-compare",
+      route: "/dynamic-updater",
     },
   ]
 
