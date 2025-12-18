@@ -1,6 +1,4 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/clean-and-compare/page": "app/clean-and-compare/page.js",
   "/dynamic-updater/page": "app/dynamic-updater/page.js",
   "/page": "app/page.js"
 }

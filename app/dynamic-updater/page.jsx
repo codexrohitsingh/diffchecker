@@ -140,8 +140,9 @@ export default function Page() {
       "KEYWORD NUMBER": "dynamic keyword number",
     }
 
-    const regex =
-      /<[^<>]*?>\s*\(\(\s*DYNAMIC:\s*([^)]+?)\s*\)\)/gi
+  const regex =
+  /<[^<>]*?>\s*\(\(?\s*DYNAMIC:\s*([^)]+?)\s*\)?\)/gi
+
 
     return cleaned.replace(regex, (fullMatch, dynKeyRaw) => {
       const mappedKey = keyMapping[dynKeyRaw.trim().toUpperCase()]

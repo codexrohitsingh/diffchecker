@@ -132,7 +132,7 @@ function Page() {
             "HASHTAG NUMBER": "dynamic hashtag number",
             "KEYWORD NUMBER": "dynamic keyword number"
         };
-        const regex = /<[^<>]*?>\s*\(\(\s*DYNAMIC:\s*([^)]+?)\s*\)\)/gi;
+        const regex = /<[^<>]*?>\s*\(\(?\s*DYNAMIC:\s*([^)]+?)\s*\)?\)/gi;
         return cleaned.replace(regex, (fullMatch, dynKeyRaw)=>{
             const mappedKey = keyMapping[dynKeyRaw.trim().toUpperCase()];
             if (!mappedKey) return fullMatch;
@@ -166,19 +166,19 @@ function Page() {
                                 size: 16
                             }, void 0, false, {
                                 fileName: "[project]/app/dynamic-updater/page.jsx",
-                                lineNumber: 173,
+                                lineNumber: 174,
                                 columnNumber: 13
                             }, this),
                             " Back"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dynamic-updater/page.jsx",
-                        lineNumber: 172,
+                        lineNumber: 173,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/dynamic-updater/page.jsx",
-                    lineNumber: 171,
+                    lineNumber: 172,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -189,7 +189,7 @@ function Page() {
                             children: "Dynamic Settings"
                         }, void 0, false, {
                             fileName: "[project]/app/dynamic-updater/page.jsx",
-                            lineNumber: 178,
+                            lineNumber: 179,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -198,7 +198,7 @@ function Page() {
                             children: "Clear All"
                         }, void 0, false, {
                             fileName: "[project]/app/dynamic-updater/page.jsx",
-                            lineNumber: 180,
+                            lineNumber: 181,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -210,7 +210,7 @@ function Page() {
                                             children: field
                                         }, void 0, false, {
                                             fileName: "[project]/app/dynamic-updater/page.jsx",
-                                            lineNumber: 190,
+                                            lineNumber: 191,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -219,24 +219,24 @@ function Page() {
                                             className: "w-full p-2 rounded border bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-600"
                                         }, void 0, false, {
                                             fileName: "[project]/app/dynamic-updater/page.jsx",
-                                            lineNumber: 191,
+                                            lineNumber: 192,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, field, true, {
                                     fileName: "[project]/app/dynamic-updater/page.jsx",
-                                    lineNumber: 189,
+                                    lineNumber: 190,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/app/dynamic-updater/page.jsx",
-                            lineNumber: 187,
+                            lineNumber: 188,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/dynamic-updater/page.jsx",
-                    lineNumber: 177,
+                    lineNumber: 178,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -246,7 +246,7 @@ function Page() {
                     className: "w-full h-72 p-4 font-mono rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700"
                 }, void 0, false, {
                     fileName: "[project]/app/dynamic-updater/page.jsx",
-                    lineNumber: 201,
+                    lineNumber: 202,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -258,7 +258,7 @@ function Page() {
                             children: "Apply"
                         }, void 0, false, {
                             fileName: "[project]/app/dynamic-updater/page.jsx",
-                            lineNumber: 209,
+                            lineNumber: 210,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -269,26 +269,26 @@ function Page() {
                                     size: 16
                                 }, void 0, false, {
                                     fileName: "[project]/app/dynamic-updater/page.jsx",
-                                    lineNumber: 220,
+                                    lineNumber: 221,
                                     columnNumber: 23
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$copy$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Copy$3e$__["Copy"], {
                                     size: 16
                                 }, void 0, false, {
                                     fileName: "[project]/app/dynamic-updater/page.jsx",
-                                    lineNumber: 220,
+                                    lineNumber: 221,
                                     columnNumber: 45
                                 }, this),
                                 copied ? "Copied" : "Copy"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/dynamic-updater/page.jsx",
-                            lineNumber: 216,
+                            lineNumber: 217,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/dynamic-updater/page.jsx",
-                    lineNumber: 208,
+                    lineNumber: 209,
                     columnNumber: 9
                 }, this),
                 appliedOutput && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -299,7 +299,7 @@ function Page() {
                             children: "Processed Output"
                         }, void 0, false, {
                             fileName: "[project]/app/dynamic-updater/page.jsx",
-                            lineNumber: 227,
+                            lineNumber: 228,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("pre", {
@@ -307,24 +307,24 @@ function Page() {
                             children: appliedOutput
                         }, void 0, false, {
                             fileName: "[project]/app/dynamic-updater/page.jsx",
-                            lineNumber: 228,
+                            lineNumber: 229,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/dynamic-updater/page.jsx",
-                    lineNumber: 226,
+                    lineNumber: 227,
                     columnNumber: 11
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/dynamic-updater/page.jsx",
-            lineNumber: 169,
+            lineNumber: 170,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/dynamic-updater/page.jsx",
-        lineNumber: 168,
+        lineNumber: 169,
         columnNumber: 5
     }, this);
 }
