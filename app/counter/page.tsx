@@ -39,95 +39,67 @@ export default function Page() {
   }, [text]);
 
   return (
-    <main className="min-h-screen bg-slate-50 p-4 font-sans text-slate-900 dark:bg-slate-900 dark:text-slate-100 sm:p-6 lg:p-8">
-      
-      <div className="  p-10  mx-auto max-w-4xl space-y-9 rounded-2xl
-    border border-slate-200 bg-white
-    shadow-sm
-    dark:border-slate-700 dark:bg-slate-900
-  ">
-    <Link
-          href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Home
-        </Link>
+    <main className="min-h-screen bg-slate-50 px-4 py-6 sm:px-6 lg:px-8 font-sans text-slate-900 dark:bg-slate-900 dark:text-slate-100">
+
+      {/* Back Button */}
+      <Link
+        href="/"
+        className="inline-flex items-center gap-2 mb-4 rounded-lg px-3 py-2 text-sm
+        text-slate-700 dark:text-slate-300
+        hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Back to Home
+      </Link>
+
+      {/* Card */}
+      <div
+        className="mx-auto max-w-7xl space-y-8 rounded-2xl border
+        border-slate-200 bg-white p-4 sm:p-6 lg:p-10 shadow-sm
+        dark:border-slate-700 dark:bg-slate-900"
+      >
+
         {/* Text Area */}
         <textarea
           placeholder="Start writing here..."
           value={text}
           onChange={(e) => setText(e.target.value)}
           className="
-            w-full min-h-[340px] resize-y rounded-xl border
+            w-full resize-y rounded-xl border
             border-slate-200 bg-white p-4 text-base outline-none
+            min-h-[200px] sm:min-h-[280px] lg:min-h-[340px]
             focus:ring-2 focus:ring-sky-400
             dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100
           "
         />
-     
-        {/* Stats Section */}
-        <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-800">
-  <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">
-    Statistics
-  </h3>
 
-  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {/* Stats */}
+        <div className="border-t border-slate-200 pt-6 dark:border-slate-800">
+          <h3 className="mb-4 text-sm font-semibold">Statistics</h3>
 
-    <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
-      <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">Words</p>
-      <p className="text-2xl font-bold text-sky-500">{stats.words}</p>
-    </div>
-
-    <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
-      <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">Sentences</p>
-      <p className="text-2xl font-bold text-orange-500">{stats.sentences}</p>
-    </div>
-
-    <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
-      <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">
-        Characters (no spaces)
-      </p>
-      <p className="text-2xl font-bold text-green-500">
-        {stats.charactersWithoutSpaces}
-      </p>
-    </div>
-
-    <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
-      <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">
-        Characters (with spaces)
-      </p>
-      <p className="text-2xl font-bold text-sky-500">
-        {stats.charactersWithSpaces}
-      </p>
-    </div>
-
-    <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
-      <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">Paragraphs</p>
-      <p className="text-2xl font-bold text-orange-500">
-        {stats.paragraphs}
-      </p>
-    </div>
-
-    <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
-      <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">
-        Reading Time
-      </p>
-      <p className="text-2xl font-bold text-green-500">
-        {stats.readingTime}
-      </p>
-    </div>
-
-  </div>
-</div>
-
-              
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <StatBox label="Words" value={stats.words} color="text-sky-500" />
+            <StatBox label="Sentences" value={stats.sentences} color="text-orange-500" />
+            <StatBox
+              label="Characters (no spaces)"
+              value={stats.charactersWithoutSpaces}
+              color="text-green-500"
+            />
+            <StatBox
+              label="Characters (with spaces)"
+              value={stats.charactersWithSpaces}
+              color="text-sky-500"
+            />
+            <StatBox label="Paragraphs" value={stats.paragraphs} color="text-orange-500" />
+            <StatBox label="Latency" value={stats.readingTime} color="text-green-500" />
+          </div>
+        </div>
       </div>
     </main>
   );
 }
 
-function Stat({
+function StatBox({
   label,
   value,
   color,
@@ -137,9 +109,9 @@ function Stat({
   color: string;
 }) {
   return (
-    <div className="flex items-center justify-between border-b border-slate-100 py-3 dark:border-slate-700">
-      <span className="text-slate-600 dark:text-slate-300">{label}</span>
-      <span className={`font-semibold ${color}`}>{value}</span>
+    <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-950">
+      <p className="mb-1 text-xs text-slate-600 dark:text-slate-400">{label}</p>
+      <p className={`text-2xl font-bold ${color}`}>{value}</p>
     </div>
   );
 }

@@ -46,20 +46,22 @@ export default function Home() {
   ],
   route: "/dynamic-updater",
 },
-  {
+{
   id: "Counter",
   icon: Layers,
-  title: " Value Counter",
+  title: "Character Counter",
   description:
-    "Seamlessly clean, analyze, and compare text with unmatched precision.",
+    "A refined instrument for precise character, word, and readability measurement.",
   features: [
-    "Intelligent text purification",
-    "Elegant side-by-side analysis",
-    "Fully customizable cleaning options",
-    "Highlight differences down to each word",
+    "Accurate word and character counting",
+    "Whitespace-aware character metrics",
+    "Sentence and paragraph detection",
+    "Estimated reading time analysis",
   ],
   route: "/counter",
 }
+
+
   ]
 
   return (
@@ -74,7 +76,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8">
           {products.map((product) => (
             <ProductCard
               key={product.id}
