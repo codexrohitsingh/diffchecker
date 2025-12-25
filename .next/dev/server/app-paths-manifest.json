@@ -1,5 +1,4 @@
 {
-  "/dynamic-updater/page": "app/dynamic-updater/page.js",
   "/page": "app/page.js",
   "/text-cleaner/page": "app/text-cleaner/page.js"
 }
