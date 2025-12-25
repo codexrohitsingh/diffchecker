@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { useState, useMemo } from "react";
 
 export default function Page() {
@@ -38,11 +40,19 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-slate-50 p-4 font-sans text-slate-900 dark:bg-slate-900 dark:text-slate-100 sm:p-6 lg:p-8">
-      <div className="   p-10 mx-auto max-w-4xl space-y-9 rounded-2xl
+      
+      <div className="  p-10  mx-auto max-w-4xl space-y-9 rounded-2xl
     border border-slate-200 bg-white
     shadow-sm
     dark:border-slate-700 dark:bg-slate-900
   ">
+    <Link
+          href="/"
+          className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Home
+        </Link>
         {/* Text Area */}
         <textarea
           placeholder="Start writing here..."
@@ -55,7 +65,7 @@ export default function Page() {
             dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100
           "
         />
-
+     
         {/* Stats Section */}
         <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-800">
   <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">
