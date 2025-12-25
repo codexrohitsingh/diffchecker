@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import { Copy, Check, ArrowLeft, Sun, Moon } from "lucide-react"
+import { Copy, Check, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
 export default function Page() {
@@ -90,6 +90,14 @@ export default function Page() {
   }
 
   // -------------------------
+  // CLEAR FUNCTION (NEW)
+  // -------------------------
+  const handleClear = () => {
+    setText1("")
+    setAppliedOutput("")
+  }
+
+  // -------------------------
   // TEXT CLEANING
   // -------------------------
   const cleanText = (input) => {
@@ -140,9 +148,8 @@ export default function Page() {
       "KEYWORD NUMBER": "dynamic keyword number",
     }
 
-  const regex =
-  /<[^<>]*?>\s*\(\(?\s*DYNAMIC:\s*([^)]+?)\s*\)?\)/gi
-
+    const regex =
+      /<[^<>]*?>\s*\(\(?\s*DYNAMIC:\s*([^)]+?)\s*\)?\)/gi
 
     return cleaned.replace(regex, (fullMatch, dynKeyRaw) => {
       const mappedKey = keyMapping[dynKeyRaw.trim().toUpperCase()]
@@ -182,7 +189,7 @@ export default function Page() {
             onClick={handleClearSettings}
             className="mb-4 px-4 py-2 bg-red-600 text-white rounded-lg"
           >
-            Clear All
+            Clear All Settings
           </button>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -220,6 +227,13 @@ export default function Page() {
           >
             {copied ? <Check size={16} /> : <Copy size={16} />}
             {copied ? "Copied" : "Copy"}
+          </button>
+
+          <button
+            onClick={handleClear}
+            className="px-6 py-2 bg-red-600 text-white rounded-lg"
+          >
+            Clear
           </button>
         </div>
 

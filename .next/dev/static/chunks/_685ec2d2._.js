@@ -54,6 +54,21 @@ function TextCleaner() {
         return result;
     };
     const output = cleanText(text);
+    // Trim once to avoid repeated work
+    const trimmed = output.trim();
+    // Words
+    const words = trimmed ? trimmed.split(/\s+/).filter(Boolean).length : 0;
+    // Sentences (basic punctuation-based)
+    const sentences = trimmed ? trimmed.split(/[.!?]+/).filter((s)=>s.trim().length > 0).length : 0;
+    // Characters
+    const charactersWithSpaces = output.length;
+    const charactersWithoutSpaces = output.replace(/\s/g, '').length;
+    // Paragraphs (non-empty lines)
+    const paragraphs = trimmed ? output.split(/\n+/).filter((p)=>p.trim() !== '').length : 0;
+    // Reading time (average 200 words/min)
+    const readingTimeMinutes = words > 0 ? Math.ceil(words / 200) : 0;
+    const wordCount = output.trim().split(/\s+/) // split by any whitespace
+    .filter((word)=>word !== '').length;
     const originalLines = text.split('\n').length;
     const cleanedLines = output.split('\n').length;
     const linesRemoved = originalLines - cleanedLines;
@@ -80,14 +95,14 @@ function TextCleaner() {
                             className: "w-4 h-4"
                         }, void 0, false, {
                             fileName: "[project]/app/text-cleaner/page.jsx",
-                            lineNumber: 81,
+                            lineNumber: 111,
                             columnNumber: 11
                         }, this),
                         "Back to Home"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/text-cleaner/page.jsx",
-                    lineNumber: 77,
+                    lineNumber: 107,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -106,12 +121,12 @@ function TextCleaner() {
                                                 className: `bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${removeExtraLines ? 'translate-x-5' : ''}`
                                             }, void 0, false, {
                                                 fileName: "[project]/app/text-cleaner/page.jsx",
-                                                lineNumber: 96,
+                                                lineNumber: 126,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-cleaner/page.jsx",
-                                            lineNumber: 90,
+                                            lineNumber: 120,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -119,13 +134,13 @@ function TextCleaner() {
                                             children: "Remove extra blank lines"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-cleaner/page.jsx",
-                                            lineNumber: 102,
+                                            lineNumber: 132,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-cleaner/page.jsx",
-                                    lineNumber: 89,
+                                    lineNumber: 119,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -138,12 +153,12 @@ function TextCleaner() {
                                                 className: `bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${removeInitialSpaces ? 'translate-x-5' : ''}`
                                             }, void 0, false, {
                                                 fileName: "[project]/app/text-cleaner/page.jsx",
-                                                lineNumber: 115,
+                                                lineNumber: 145,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-cleaner/page.jsx",
-                                            lineNumber: 109,
+                                            lineNumber: 139,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -151,19 +166,19 @@ function TextCleaner() {
                                             children: "Remove leading spaces"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-cleaner/page.jsx",
-                                            lineNumber: 121,
+                                            lineNumber: 151,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-cleaner/page.jsx",
-                                    lineNumber: 108,
+                                    lineNumber: 138,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/text-cleaner/page.jsx",
-                            lineNumber: 86,
+                            lineNumber: 116,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -179,7 +194,7 @@ function TextCleaner() {
                                                     children: "Input"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/text-cleaner/page.jsx",
-                                                    lineNumber: 133,
+                                                    lineNumber: 163,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -190,13 +205,13 @@ function TextCleaner() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/text-cleaner/page.jsx",
-                                                    lineNumber: 134,
+                                                    lineNumber: 164,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/text-cleaner/page.jsx",
-                                            lineNumber: 132,
+                                            lineNumber: 162,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -208,13 +223,13 @@ function TextCleaner() {
                                             className: "w-full p-4 text-sm font-mono bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-700 resize-y"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-cleaner/page.jsx",
-                                            lineNumber: 137,
+                                            lineNumber: 167,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-cleaner/page.jsx",
-                                    lineNumber: 131,
+                                    lineNumber: 161,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -227,7 +242,38 @@ function TextCleaner() {
                                                     children: "Output"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/text-cleaner/page.jsx",
-                                                    lineNumber: 150,
+                                                    lineNumber: 180,
+                                                    columnNumber: 17
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "flex items-center gap-3",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "text-xs text-slate-500 dark:text-slate-400",
+                                                            children: [
+                                                                outputLengthWithoutNumbers,
+                                                                " characters"
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/app/text-cleaner/page.jsx",
+                                                            lineNumber: 182,
+                                                            columnNumber: 3
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "text-xs text-slate-500 dark:text-slate-400",
+                                                            children: [
+                                                                wordCount,
+                                                                " words"
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/app/text-cleaner/page.jsx",
+                                                            lineNumber: 183,
+                                                            columnNumber: 3
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/app/text-cleaner/page.jsx",
+                                                    lineNumber: 181,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -240,18 +286,18 @@ function TextCleaner() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/text-cleaner/page.jsx",
-                                                        lineNumber: 152,
+                                                        lineNumber: 187,
                                                         columnNumber: 19
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/text-cleaner/page.jsx",
-                                                    lineNumber: 151,
+                                                    lineNumber: 186,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/text-cleaner/page.jsx",
-                                            lineNumber: 149,
+                                            lineNumber: 179,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -262,19 +308,19 @@ function TextCleaner() {
                                             className: "w-full p-4 text-sm font-mono bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-0 focus:border-slate-300 dark:focus:border-slate-700 resize-y"
                                         }, void 0, false, {
                                             fileName: "[project]/app/text-cleaner/page.jsx",
-                                            lineNumber: 156,
+                                            lineNumber: 191,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/text-cleaner/page.jsx",
-                                    lineNumber: 148,
+                                    lineNumber: 178,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/text-cleaner/page.jsx",
-                            lineNumber: 128,
+                            lineNumber: 158,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -290,7 +336,7 @@ function TextCleaner() {
                                                 className: "w-5.5 h-5.5"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/text-cleaner/page.jsx",
-                                                lineNumber: 176,
+                                                lineNumber: 211,
                                                 columnNumber: 23
                                             }, this),
                                             "Copied"
@@ -301,7 +347,7 @@ function TextCleaner() {
                                                 className: "w-5.5 h-5.5"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/text-cleaner/page.jsx",
-                                                lineNumber: 181,
+                                                lineNumber: 216,
                                                 columnNumber: 23
                                             }, this),
                                             "Copy Text"
@@ -309,7 +355,7 @@ function TextCleaner() {
                                     }, void 0, true)
                                 }, void 0, false, {
                                     fileName: "[project]/app/text-cleaner/page.jsx",
-                                    lineNumber: 169,
+                                    lineNumber: 204,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -318,163 +364,130 @@ function TextCleaner() {
                                     children: "Clear"
                                 }, void 0, false, {
                                     fileName: "[project]/app/text-cleaner/page.jsx",
-                                    lineNumber: 187,
+                                    lineNumber: 222,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/text-cleaner/page.jsx",
-                            lineNumber: 168,
+                            lineNumber: 203,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "mt-8 pt-8 border-t border-slate-200 dark:border-slate-800",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                    className: "text-sm font-semibold text-slate-900 dark:text-white mb-4",
-                                    children: "Cleanup Statistics"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/text-cleaner/page.jsx",
-                                    lineNumber: 197,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "grid grid-cols-2 md:grid-cols-4 gap-4",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4 transition-colors",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-xs text-slate-600 dark:text-slate-400 mb-1",
-                                                    children: "Original Length"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/text-cleaner/page.jsx",
-                                                    lineNumber: 201,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-2xl font-bold text-slate-900 dark:text-white",
-                                                    children: text.length
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/text-cleaner/page.jsx",
-                                                    lineNumber: 202,
-                                                    columnNumber: 17
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/text-cleaner/page.jsx",
-                                            lineNumber: 200,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4 transition-colors",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-xs text-slate-600 dark:text-slate-400 mb-1",
-                                                    children: "Current Length"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/text-cleaner/page.jsx",
-                                                    lineNumber: 206,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-2xl font-bold text-blue-600",
-                                                    children: outputLengthWithoutNumbers
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/text-cleaner/page.jsx",
-                                                    lineNumber: 207,
-                                                    columnNumber: 17
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/text-cleaner/page.jsx",
-                                            lineNumber: 205,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4 transition-colors",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-xs text-slate-600 dark:text-slate-400 mb-1",
-                                                    children: "Lines Removed"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/text-cleaner/page.jsx",
-                                                    lineNumber: 211,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-2xl font-bold text-red-600",
-                                                    children: linesRemoved
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/text-cleaner/page.jsx",
-                                                    lineNumber: 212,
-                                                    columnNumber: 17
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/text-cleaner/page.jsx",
-                                            lineNumber: 210,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4 transition-colors",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-xs text-slate-600 dark:text-slate-400 mb-1",
-                                                    children: "Spaces Removed"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/text-cleaner/page.jsx",
-                                                    lineNumber: 216,
-                                                    columnNumber: 17
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-2xl font-bold text-orange-600",
-                                                    children: spacesRemoved
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/text-cleaner/page.jsx",
-                                                    lineNumber: 217,
-                                                    columnNumber: 17
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/text-cleaner/page.jsx",
-                                            lineNumber: 215,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/text-cleaner/page.jsx",
-                                    lineNumber: 198,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "grid grid-cols-2 md:grid-cols-3 gap-6",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Stat, {
+                                        label: "Words",
+                                        value: words
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/text-cleaner/page.jsx",
+                                        lineNumber: 234,
+                                        columnNumber: 5
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Stat, {
+                                        label: "Sentences",
+                                        value: sentences
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/text-cleaner/page.jsx",
+                                        lineNumber: 235,
+                                        columnNumber: 5
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Stat, {
+                                        label: "Characters without spaces",
+                                        value: charactersWithoutSpaces
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/text-cleaner/page.jsx",
+                                        lineNumber: 236,
+                                        columnNumber: 5
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Stat, {
+                                        label: "Characters with spaces",
+                                        value: charactersWithSpaces
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/text-cleaner/page.jsx",
+                                        lineNumber: 237,
+                                        columnNumber: 5
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Stat, {
+                                        label: "Paragraphs",
+                                        value: paragraphs
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/text-cleaner/page.jsx",
+                                        lineNumber: 238,
+                                        columnNumber: 5
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Stat, {
+                                        label: "Reading Time",
+                                        value: `${readingTimeMinutes}m ${readingTimeMinutes > 0 ? '0s' : '0s'}`
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/text-cleaner/page.jsx",
+                                        lineNumber: 239,
+                                        columnNumber: 5
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/text-cleaner/page.jsx",
+                                lineNumber: 232,
+                                columnNumber: 3
+                            }, this)
+                        }, void 0, false, {
                             fileName: "[project]/app/text-cleaner/page.jsx",
-                            lineNumber: 196,
-                            columnNumber: 11
+                            lineNumber: 231,
+                            columnNumber: 7
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/text-cleaner/page.jsx",
-                    lineNumber: 85,
+                    lineNumber: 115,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/text-cleaner/page.jsx",
-            lineNumber: 76,
+            lineNumber: 106,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/text-cleaner/page.jsx",
-        lineNumber: 75,
+        lineNumber: 105,
         columnNumber: 5
     }, this);
 }
 _s(TextCleaner, "vrTDnFlNiIQmwBYjRUHT+nHv30A=");
 _c = TextCleaner;
-var _c;
+function Stat({ label, value }) {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "flex flex-col gap-1 border-b border-slate-200 dark:border-slate-800 pb-2",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                className: "text-sm text-slate-600 dark:text-slate-400",
+                children: label
+            }, void 0, false, {
+                fileName: "[project]/app/text-cleaner/page.jsx",
+                lineNumber: 252,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                className: "text-2xl font-semibold text-emerald-600",
+                children: value
+            }, void 0, false, {
+                fileName: "[project]/app/text-cleaner/page.jsx",
+                lineNumber: 255,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/app/text-cleaner/page.jsx",
+        lineNumber: 251,
+        columnNumber: 5
+    }, this);
+}
+_c1 = Stat;
+var _c, _c1;
 __turbopack_context__.k.register(_c, "TextCleaner");
+__turbopack_context__.k.register(_c1, "Stat");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }

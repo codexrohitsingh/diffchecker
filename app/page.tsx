@@ -32,20 +32,21 @@ export default function Home() {
       ],
       route: "/text-compare",
     },
-    {
-      id: "dynamic-updater",
-      icon: Layers,
-      title: "Dynamic value updater",
-      description:
-        "Combine text cleaning and comparison in one powerful tool.",
-      features: [
-        "Auto-clean both texts",
-        "Side-by-side comparison",
-        "Configurable cleaning options",
-        "Word-level highlights",
-      ],
-      route: "/dynamic-updater",
-    },
+  {
+  id: "dynamic-updater",
+  icon: Layers,
+  title: "Dynamic Value Enhancer",
+  description:
+    "Seamlessly clean, analyze, and compare text with unmatched precision.",
+  features: [
+    "Intelligent text purification",
+    "Elegant side-by-side analysis",
+    "Fully customizable cleaning options",
+    "Highlight differences down to each word",
+  ],
+  route: "/dynamic-updater",
+}
+
   ]
 
   return (
@@ -56,7 +57,7 @@ export default function Home() {
             Professional Text <span className="text-blue-600 dark:text-blue-400">Processing Tools</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Clean, compare, and analyze your texts with powerful tools designed for professionals. No sign-up required.
+            Clean, compare, and analyze your texts with powerful tools designed for professionals.
           </p>
         </div>
 
