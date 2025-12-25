@@ -37,54 +37,81 @@ export default function Page() {
   }, [text]);
 
   return (
-    <main className="min-h-screen bg-slate-50 p-8 font-sans">
-      {/* Header */}
-      <h1 className="mb-6 text-3xl font-bold bg-gradient-to-r from-sky-400 via-orange-400 to-green-500 bg-clip-text text-transparent">
-        Solvify Text Analyzer
-      </h1>
-
-      <div className="flex gap-8">
+    <main className="min-h-screen bg-slate-50 p-4 font-sans text-slate-900 dark:bg-slate-900 dark:text-slate-100 sm:p-6 lg:p-8">
+      <div className="   p-10 mx-auto max-w-4xl space-y-9 rounded-2xl
+    border border-slate-200 bg-white
+    shadow-sm
+    dark:border-slate-700 dark:bg-slate-900
+  ">
         {/* Text Area */}
         <textarea
           placeholder="Start writing here..."
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="w-2/3 min-h-[340px] resize-y rounded-xl border border-slate-200 bg-white text-black  p-4 text-base outline-none focus:ring-2 focus:ring-sky-400"
+          className="
+            w-full min-h-[340px] resize-y rounded-xl border
+            border-slate-200 bg-white p-4 text-base outline-none
+            focus:ring-2 focus:ring-sky-400
+            dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100
+          "
         />
 
-        {/* Stats Panel */}
-        <div className="w-1/3 rounded-2xl bg-white p-6 shadow-lg">
-          <h3 className="mb-4 text-lg font-semibold text-slate-800">
-            Suggestions
-          </h3>
+        {/* Stats Section */}
+        <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-800">
+  <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">
+    Statistics
+  </h3>
 
-          <Stat label="Words" value={stats.words} color="text-sky-500" />
-          <Stat
-            label="Sentences"
-            value={stats.sentences}
-            color="text-orange-500"
-          />
-          <Stat
-            label="Characters without spaces"
-            value={stats.charactersWithoutSpaces}
-            color="text-green-500"
-          />
-          <Stat
-            label="Characters with spaces"
-            value={stats.charactersWithSpaces}
-            color="text-sky-500"
-          />
-          <Stat
-            label="Paragraphs"
-            value={stats.paragraphs}
-            color="text-orange-500"
-          />
-          <Stat
-            label="Reading Time"
-            value={stats.readingTime}
-            color="text-green-500"
-          />
-        </div>
+  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+
+    <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
+      <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">Words</p>
+      <p className="text-2xl font-bold text-sky-500">{stats.words}</p>
+    </div>
+
+    <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
+      <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">Sentences</p>
+      <p className="text-2xl font-bold text-orange-500">{stats.sentences}</p>
+    </div>
+
+    <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
+      <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">
+        Characters (no spaces)
+      </p>
+      <p className="text-2xl font-bold text-green-500">
+        {stats.charactersWithoutSpaces}
+      </p>
+    </div>
+
+    <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
+      <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">
+        Characters (with spaces)
+      </p>
+      <p className="text-2xl font-bold text-sky-500">
+        {stats.charactersWithSpaces}
+      </p>
+    </div>
+
+    <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
+      <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">Paragraphs</p>
+      <p className="text-2xl font-bold text-orange-500">
+        {stats.paragraphs}
+      </p>
+    </div>
+
+    <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
+      <p className="text-xs text-slate-600 dark:text-slate-400 mb-1">
+        Reading Time
+      </p>
+      <p className="text-2xl font-bold text-green-500">
+        {stats.readingTime}
+      </p>
+    </div>
+
+  </div>
+</div>
+
+              
       </div>
     </main>
   );
@@ -100,8 +127,8 @@ function Stat({
   color: string;
 }) {
   return (
-    <div className="flex items-center justify-between border-b border-slate-100 py-3">
-      <span className="text-slate-600">{label}</span>
+    <div className="flex items-center justify-between border-b border-slate-100 py-3 dark:border-slate-700">
+      <span className="text-slate-600 dark:text-slate-300">{label}</span>
       <span className={`font-semibold ${color}`}>{value}</span>
     </div>
   );

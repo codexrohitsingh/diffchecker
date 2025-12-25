@@ -34,108 +34,203 @@ function Page() {
         text
     ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-        className: "min-h-screen bg-slate-50 p-8 font-sans",
-        children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                className: "mb-6 text-3xl font-bold bg-gradient-to-r from-sky-400 via-orange-400 to-green-500 bg-clip-text text-transparent",
-                children: "Solvify Text Analyzer"
-            }, void 0, false, {
-                fileName: "[project]/app/counter/page.tsx",
-                lineNumber: 42,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex gap-8",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                        placeholder: "Start writing here...",
-                        value: text,
-                        onChange: (e)=>setText(e.target.value),
-                        className: "w-2/3 min-h-[340px] resize-y rounded-xl border border-slate-200 bg-white text-black  p-4 text-base outline-none focus:ring-2 focus:ring-sky-400"
-                    }, void 0, false, {
-                        fileName: "[project]/app/counter/page.tsx",
-                        lineNumber: 48,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "w-1/3 rounded-2xl bg-white p-6 shadow-lg",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "mb-4 text-lg font-semibold text-slate-800",
-                                children: "Suggestions"
-                            }, void 0, false, {
-                                fileName: "[project]/app/counter/page.tsx",
-                                lineNumber: 57,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Stat, {
-                                label: "Words",
-                                value: stats.words,
-                                color: "text-sky-500"
-                            }, void 0, false, {
-                                fileName: "[project]/app/counter/page.tsx",
-                                lineNumber: 61,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Stat, {
-                                label: "Sentences",
-                                value: stats.sentences,
-                                color: "text-orange-500"
-                            }, void 0, false, {
-                                fileName: "[project]/app/counter/page.tsx",
-                                lineNumber: 62,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Stat, {
-                                label: "Characters without spaces",
-                                value: stats.charactersWithoutSpaces,
-                                color: "text-green-500"
-                            }, void 0, false, {
-                                fileName: "[project]/app/counter/page.tsx",
-                                lineNumber: 67,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Stat, {
-                                label: "Characters with spaces",
-                                value: stats.charactersWithSpaces,
-                                color: "text-sky-500"
-                            }, void 0, false, {
-                                fileName: "[project]/app/counter/page.tsx",
-                                lineNumber: 72,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Stat, {
-                                label: "Paragraphs",
-                                value: stats.paragraphs,
-                                color: "text-orange-500"
-                            }, void 0, false, {
-                                fileName: "[project]/app/counter/page.tsx",
-                                lineNumber: 77,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Stat, {
-                                label: "Reading Time",
-                                value: stats.readingTime,
-                                color: "text-green-500"
-                            }, void 0, false, {
-                                fileName: "[project]/app/counter/page.tsx",
-                                lineNumber: 82,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/app/counter/page.tsx",
-                        lineNumber: 56,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/app/counter/page.tsx",
-                lineNumber: 46,
-                columnNumber: 7
-            }, this)
-        ]
-    }, void 0, true, {
+        className: "min-h-screen bg-slate-50 p-4 font-sans text-slate-900 dark:bg-slate-900 dark:text-slate-100 sm:p-6 lg:p-8",
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "   p-10 mx-auto max-w-4xl space-y-9 rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900 ",
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                    placeholder: "Start writing here...",
+                    value: text,
+                    onChange: (e)=>setText(e.target.value),
+                    className: " w-full min-h-[340px] resize-y rounded-xl border border-slate-200 bg-white p-4 text-base outline-none focus:ring-2 focus:ring-sky-400 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 "
+                }, void 0, false, {
+                    fileName: "[project]/app/counter/page.tsx",
+                    lineNumber: 47,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "mt-8 pt-8 border-t border-slate-200 dark:border-slate-800",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                            className: "text-sm font-semibold text-slate-900 dark:text-white mb-4",
+                            children: "Statistics"
+                        }, void 0, false, {
+                            fileName: "[project]/app/counter/page.tsx",
+                            lineNumber: 61,
+                            columnNumber: 3
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "grid grid-cols-2 md:grid-cols-3 gap-4",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-xs text-slate-600 dark:text-slate-400 mb-1",
+                                            children: "Words"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/counter/page.tsx",
+                                            lineNumber: 68,
+                                            columnNumber: 7
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-2xl font-bold text-sky-500",
+                                            children: stats.words
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/counter/page.tsx",
+                                            lineNumber: 69,
+                                            columnNumber: 7
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/counter/page.tsx",
+                                    lineNumber: 67,
+                                    columnNumber: 5
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-xs text-slate-600 dark:text-slate-400 mb-1",
+                                            children: "Sentences"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/counter/page.tsx",
+                                            lineNumber: 73,
+                                            columnNumber: 7
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-2xl font-bold text-orange-500",
+                                            children: stats.sentences
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/counter/page.tsx",
+                                            lineNumber: 74,
+                                            columnNumber: 7
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/counter/page.tsx",
+                                    lineNumber: 72,
+                                    columnNumber: 5
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-xs text-slate-600 dark:text-slate-400 mb-1",
+                                            children: "Characters (no spaces)"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/counter/page.tsx",
+                                            lineNumber: 78,
+                                            columnNumber: 7
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-2xl font-bold text-green-500",
+                                            children: stats.charactersWithoutSpaces
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/counter/page.tsx",
+                                            lineNumber: 81,
+                                            columnNumber: 7
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/counter/page.tsx",
+                                    lineNumber: 77,
+                                    columnNumber: 5
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-xs text-slate-600 dark:text-slate-400 mb-1",
+                                            children: "Characters (with spaces)"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/counter/page.tsx",
+                                            lineNumber: 87,
+                                            columnNumber: 7
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-2xl font-bold text-sky-500",
+                                            children: stats.charactersWithSpaces
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/counter/page.tsx",
+                                            lineNumber: 90,
+                                            columnNumber: 7
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/counter/page.tsx",
+                                    lineNumber: 86,
+                                    columnNumber: 5
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-xs text-slate-600 dark:text-slate-400 mb-1",
+                                            children: "Paragraphs"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/counter/page.tsx",
+                                            lineNumber: 96,
+                                            columnNumber: 7
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-2xl font-bold text-orange-500",
+                                            children: stats.paragraphs
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/counter/page.tsx",
+                                            lineNumber: 97,
+                                            columnNumber: 7
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/counter/page.tsx",
+                                    lineNumber: 95,
+                                    columnNumber: 5
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-4",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-xs text-slate-600 dark:text-slate-400 mb-1",
+                                            children: "Reading Time"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/counter/page.tsx",
+                                            lineNumber: 103,
+                                            columnNumber: 7
+                                        }, this),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-2xl font-bold text-green-500",
+                                            children: stats.readingTime
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/counter/page.tsx",
+                                            lineNumber: 106,
+                                            columnNumber: 7
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/app/counter/page.tsx",
+                                    lineNumber: 102,
+                                    columnNumber: 5
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/counter/page.tsx",
+                            lineNumber: 65,
+                            columnNumber: 3
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/app/counter/page.tsx",
+                    lineNumber: 60,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/app/counter/page.tsx",
+            lineNumber: 41,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
         fileName: "[project]/app/counter/page.tsx",
         lineNumber: 40,
         columnNumber: 5
@@ -143,14 +238,14 @@ function Page() {
 }
 function Stat({ label, value, color }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex items-center justify-between border-b border-slate-100 py-3",
+        className: "flex items-center justify-between border-b border-slate-100 py-3 dark:border-slate-700",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                className: "text-slate-600",
+                className: "text-slate-600 dark:text-slate-300",
                 children: label
             }, void 0, false, {
                 fileName: "[project]/app/counter/page.tsx",
-                lineNumber: 104,
+                lineNumber: 131,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -158,13 +253,13 @@ function Stat({ label, value, color }) {
                 children: value
             }, void 0, false, {
                 fileName: "[project]/app/counter/page.tsx",
-                lineNumber: 105,
+                lineNumber: 132,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/counter/page.tsx",
-        lineNumber: 103,
+        lineNumber: 130,
         columnNumber: 5
     }, this);
 }
