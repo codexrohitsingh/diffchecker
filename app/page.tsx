@@ -45,8 +45,21 @@ export default function Home() {
     "Highlight differences down to each word",
   ],
   route: "/dynamic-updater",
+},
+  {
+  id: "Counter",
+  icon: Layers,
+  title: " Value Counter",
+  description:
+    "Seamlessly clean, analyze, and compare text with unmatched precision.",
+  features: [
+    "Intelligent text purification",
+    "Elegant side-by-side analysis",
+    "Fully customizable cleaning options",
+    "Highlight differences down to each word",
+  ],
+  route: "/counter",
 }
-
   ]
 
   return (

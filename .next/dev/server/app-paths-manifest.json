@@ -1,4 +1,7 @@
 {
+  "/counter/page": "app/counter/page.js",
+  "/dynamic-updater/page": "app/dynamic-updater/page.js",
   "/page": "app/page.js",
-  "/text-cleaner/page": "app/text-cleaner/page.js"
+  "/text-cleaner/page": "app/text-cleaner/page.js",
+  "/text-compare/page": "app/text-compare/page.js"
 }
