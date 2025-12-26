@@ -35,7 +35,7 @@ export default function Home() {
 {
   id: "dynamic-updater",
   icon: Layers,
-  title: "Dynamic Template Updater",
+  title: "Dynamic  Updater",
   description:
     "Replace dynamic placeholders in templates instantly using saved values, with built-in text cleaning and formatting controls.",
   features: [

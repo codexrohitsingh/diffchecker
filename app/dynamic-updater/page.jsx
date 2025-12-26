@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import { Copy, Check, ArrowLeft } from "lucide-react"
+import { Copy, Check, ArrowLeft, UserStar } from "lucide-react"
 import Link from "next/link"
+
 
 export default function Page() {
   // -------------------------
@@ -35,7 +36,7 @@ export default function Page() {
 
   // ✅ applied output (only updates on Apply)
   const [appliedOutput, setAppliedOutput] = useState("")
-
+  const [clear,setClear] =useState("Clear all setting")
   // -------------------------
   // ALLOWED DYNAMIC FIELDS
   // -------------------------
@@ -87,6 +88,10 @@ export default function Page() {
   const handleClearSettings = () => {
     setSettings({})
     localStorage.removeItem("dynamicSettings")
+    setClear("All setting cleared")
+    setTimeout(()=>{
+      setClear("Clear all setting")
+    },3000)
   }
 
   // -------------------------
@@ -187,9 +192,9 @@ export default function Page() {
 
           <button
             onClick={handleClearSettings}
-            className="mb-4 px-4 py-2 bg-[#EB5757] text-white rounded-lg"
+            className="mb-4 px-4 py-2 bg-[#ff0000] text-white rounded-lg"
           >
-            Clear All Settings
+            {clear}
           </button>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -231,7 +236,12 @@ export default function Page() {
 
      <button
   onClick={handleClear}
-  className="px-6 py-2 bg-[#EB5757] hover:bg-[#d64545] text-white rounded-lg transition-colors duration-200"
+  disabled={!text1}
+  className=" rounded-lg px-4 py-2 text-sm font-medium
+              bg-[#ff0000] text-white
+              hover:bg-[#ff0000]
+              disabled:opacity-50 disabled:cursor-not-allowed
+              transition"
 >
   Clear
 </button>

@@ -7,6 +7,12 @@ import { useState, useMemo } from "react";
 export default function Page() {
   const [text, setText] = useState("");
 
+  // ✅ Clear text handler
+  const handleClear = () => {
+    setText("");
+  };
+
+  // ✅ Stats calculation (pure)
   const stats = useMemo(() => {
     const trimmed = text.trim();
 
@@ -17,7 +23,7 @@ export default function Page() {
     const charactersWithSpaces = text.length;
     const charactersWithoutSpaces = text.replace(/\s/g, "").length;
     const paragraphs = trimmed
-      ? trimmed.split(/\n+/).filter(p => p.trim() !== "").length
+      ? trimmed.split(/\n+/).filter((p) => p.trim() !== "").length
       : 0;
 
     const readingTimeMinutes = words / 200;
@@ -40,7 +46,6 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-6 sm:px-6 lg:px-8 font-sans text-slate-900 dark:bg-slate-900 dark:text-slate-100">
-
       {/* Back Button */}
       <Link
         href="/"
@@ -54,10 +59,26 @@ export default function Page() {
 
       {/* Card */}
       <div
-        className="mx-auto max-w-7xl space-y-8 rounded-2xl border
+        className="mx-auto max-w-7xl space-y-6 rounded-2xl border
         border-slate-200 bg-white p-4 sm:p-6 lg:p-10 shadow-sm
         dark:border-slate-700 dark:bg-slate-900"
       >
+        {/* Clear Button */}
+        <div className="flex justify-end">
+          <button
+            onClick={handleClear}
+            disabled={!text}
+            className="
+              rounded-lg px-4 py-2 text-sm font-medium
+              bg-red-500 text-white
+              hover:bg-[#ff0000]
+              disabled:opacity-50 disabled:cursor-not-allowed
+              transition
+            "
+          >
+            Clear Text
+          </button>
+        </div>
 
         {/* Text Area */}
         <textarea
@@ -79,7 +100,11 @@ export default function Page() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <StatBox label="Words" value={stats.words} color="text-sky-500" />
-            <StatBox label="Sentences" value={stats.sentences} color="text-orange-500" />
+            <StatBox
+              label="Sentences"
+              value={stats.sentences}
+              color="text-orange-500"
+            />
             <StatBox
               label="Characters (no spaces)"
               value={stats.charactersWithoutSpaces}
@@ -90,8 +115,16 @@ export default function Page() {
               value={stats.charactersWithSpaces}
               color="text-sky-500"
             />
-            <StatBox label="Paragraphs" value={stats.paragraphs} color="text-orange-500" />
-            <StatBox label="Latency" value={stats.readingTime} color="text-green-500" />
+            <StatBox
+              label="Paragraphs"
+              value={stats.paragraphs}
+              color="text-orange-500"
+            />
+            <StatBox
+              label="Latency"
+              value={stats.readingTime}
+              color="text-green-500"
+            />
           </div>
         </div>
       </div>
@@ -110,7 +143,9 @@ function StatBox({
 }) {
   return (
     <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-950">
-      <p className="mb-1 text-xs text-slate-600 dark:text-slate-400">{label}</p>
+      <p className="mb-1 text-xs text-slate-600 dark:text-slate-400">
+        {label}
+      </p>
       <p className={`text-2xl font-bold ${color}`}>{value}</p>
     </div>
   );
