@@ -187,7 +187,7 @@ export default function Page() {
 
           <button
             onClick={handleClearSettings}
-            className="mb-4 px-4 py-2 bg-red-600 text-white rounded-lg"
+            className="mb-4 px-4 py-2 bg-[#EB5757] text-white rounded-lg"
           >
             Clear All Settings
           </button>
@@ -216,25 +216,26 @@ export default function Page() {
         <div className="flex gap-3 mt-4">
           <button
             onClick={() => setAppliedOutput(generateOutput())}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg"
+            className="px-6 py-2 bg-blue-600 hover:bg-[#27AE60] transition-colors duraton-200 text-white rounded-lg"
           >
             Apply
           </button>
 
           <button
             onClick={handleCopy}
-            className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg"
+            className="flex items-center gap-2 px-6 py-2 bg-blue-600 hover:bg-[#27AE60] transition-colors duration-200 text-white rounded-lg"
           >
             {copied ? <Check size={16} /> : <Copy size={16} />}
             {copied ? "Copied" : "Copy"}
           </button>
 
-          <button
-            onClick={handleClear}
-            className="px-6 py-2 bg-red-600 text-white rounded-lg"
-          >
-            Clear
-          </button>
+     <button
+  onClick={handleClear}
+  className="px-6 py-2 bg-[#EB5757] hover:bg-[#d64545] text-white rounded-lg transition-colors duration-200"
+>
+  Clear
+</button>
+
         </div>
 
         {appliedOutput && (
