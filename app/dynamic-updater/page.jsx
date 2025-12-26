@@ -7,23 +7,23 @@ import Link from "next/link"
 export default function Page() {
   // -------------------------
   // THEME (DARK / LIGHT)
-  // -------------------------
-  const [theme, setTheme] = useState("light")
+  // // -------------------------
+  // const [theme, setTheme] = useState("dark")
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme")
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-    const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
-    setTheme(initialTheme)
-    document.documentElement.classList.toggle("dark", initialTheme === "dark")
-  }, [])
+  // useEffect(() => {
+  //   const savedTheme = localStorage.getItem("theme")
+  //   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+  //   const initialTheme = savedTheme || (prefersDark ? "ligth" : "dark")
+  //   setTheme(initialTheme)
+  //   document.documentElement.classList.toggle("dark", initialTheme === "dark")
+  // }, [])
 
-  const toggleTheme = () => {
-    const nextTheme = theme === "dark" ? "light" : "dark"
-    setTheme(nextTheme)
-    document.documentElement.classList.toggle("dark", nextTheme === "dark")
-    localStorage.setItem("theme", nextTheme)
-  }
+  // const toggleTheme = () => {
+  //   const nextTheme = theme === "dark" ? "light" : "dark"
+  //   setTheme(nextTheme)
+  //   document.documentElement.classList.toggle("dark", nextTheme === "dark")
+  //   localStorage.setItem("theme", nextTheme)
+  // }
 
   // -------------------------
   // TEXT INPUTS
@@ -178,7 +178,7 @@ export default function Page() {
 
         <div className="flex items-center justify-between mb-6">
           <Link href="/" className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800">
-            <ArrowLeft size={16} /> Back
+            <ArrowLeft size={16} /> Back to Home
           </Link>
         </div>
 

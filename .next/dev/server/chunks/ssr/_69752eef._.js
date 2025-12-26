@@ -20,21 +20,21 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 function Page() {
     // -------------------------
     // THEME (DARK / LIGHT)
-    // -------------------------
-    const [theme, setTheme] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("light");
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        const savedTheme = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
-        setTheme(initialTheme);
-        document.documentElement.classList.toggle("dark", initialTheme === "dark");
-    }, []);
-    const toggleTheme = ()=>{
-        const nextTheme = theme === "dark" ? "light" : "dark";
-        setTheme(nextTheme);
-        document.documentElement.classList.toggle("dark", nextTheme === "dark");
-        localStorage.setItem("theme", nextTheme);
-    };
+    // // -------------------------
+    // const [theme, setTheme] = useState("dark")
+    // useEffect(() => {
+    //   const savedTheme = localStorage.getItem("theme")
+    //   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    //   const initialTheme = savedTheme || (prefersDark ? "ligth" : "dark")
+    //   setTheme(initialTheme)
+    //   document.documentElement.classList.toggle("dark", initialTheme === "dark")
+    // }, [])
+    // const toggleTheme = () => {
+    //   const nextTheme = theme === "dark" ? "light" : "dark"
+    //   setTheme(nextTheme)
+    //   document.documentElement.classList.toggle("dark", nextTheme === "dark")
+    //   localStorage.setItem("theme", nextTheme)
+    // }
     // -------------------------
     // TEXT INPUTS
     // -------------------------
@@ -176,7 +176,7 @@ function Page() {
                                 lineNumber: 181,
                                 columnNumber: 13
                             }, this),
-                            " Back"
+                            " Back to Home"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dynamic-updater/page.jsx",

@@ -32,20 +32,22 @@ export default function Home() {
       ],
       route: "/text-compare",
     },
-  {
+{
   id: "dynamic-updater",
   icon: Layers,
-  title: "Dynamic Value Enhancer",
+  title: "Dynamic Template Updater",
   description:
-    "Seamlessly clean, analyze, and compare text with unmatched precision.",
+    "Replace dynamic placeholders in templates instantly using saved values, with built-in text cleaning and formatting controls.",
   features: [
-    "Intelligent text purification",
-    "Elegant side-by-side analysis",
-    "Fully customizable cleaning options",
-    "Highlight differences down to each word",
+    "Auto-replace dynamic placeholders with custom values",
+    "Persistent dynamic settings saved in local storage",
+    "Clean and normalize text formatting automatically",
+    "Supports multiple dynamic fields like brand, region, audience, and language",
+    "One-click apply, copy, and reset actions",
   ],
   route: "/dynamic-updater",
 },
+
 {
   id: "Counter",
   icon: Layers,

@@ -22,23 +22,21 @@ function Page() {
     _s();
     // -------------------------
     // THEME (DARK / LIGHT)
-    // -------------------------
-    const [theme, setTheme] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("light");
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "Page.useEffect": ()=>{
-            const savedTheme = localStorage.getItem("theme");
-            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-            const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
-            setTheme(initialTheme);
-            document.documentElement.classList.toggle("dark", initialTheme === "dark");
-        }
-    }["Page.useEffect"], []);
-    const toggleTheme = ()=>{
-        const nextTheme = theme === "dark" ? "light" : "dark";
-        setTheme(nextTheme);
-        document.documentElement.classList.toggle("dark", nextTheme === "dark");
-        localStorage.setItem("theme", nextTheme);
-    };
+    // // -------------------------
+    // const [theme, setTheme] = useState("dark")
+    // useEffect(() => {
+    //   const savedTheme = localStorage.getItem("theme")
+    //   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    //   const initialTheme = savedTheme || (prefersDark ? "ligth" : "dark")
+    //   setTheme(initialTheme)
+    //   document.documentElement.classList.toggle("dark", initialTheme === "dark")
+    // }, [])
+    // const toggleTheme = () => {
+    //   const nextTheme = theme === "dark" ? "light" : "dark"
+    //   setTheme(nextTheme)
+    //   document.documentElement.classList.toggle("dark", nextTheme === "dark")
+    //   localStorage.setItem("theme", nextTheme)
+    // }
     // -------------------------
     // TEXT INPUTS
     // -------------------------
@@ -184,7 +182,7 @@ function Page() {
                                 lineNumber: 181,
                                 columnNumber: 13
                             }, this),
-                            " Back"
+                            " Back to Home"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/dynamic-updater/page.jsx",
@@ -352,7 +350,7 @@ function Page() {
         columnNumber: 5
     }, this);
 }
-_s(Page, "B1zY4RT7G3v5RL68OSvlzin1Y3s=");
+_s(Page, "ojlb3vjq5ZEFFRMRijHZkLU1AAs=");
 _c = Page;
 var _c;
 __turbopack_context__.k.register(_c, "Page");
